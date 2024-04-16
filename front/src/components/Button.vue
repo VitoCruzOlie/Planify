@@ -10,10 +10,6 @@ const button = tv({
       outline: "bg-transparent text-white border border-white",
     },
   },
-  defaultVariants:{
-    variant: "primary",
-  
-  }
 });
 
 type Variants = VariantProps<typeof button>;
@@ -28,8 +24,7 @@ const props = defineProps<Props>();
   <button
     :class="
       button({
-        //@ts-ignore
-        variant: props.variant,
+        variant: props.variant.variant,
       })
     "
   >
