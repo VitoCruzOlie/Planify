@@ -9,13 +9,11 @@ import HomeCarousel from "../components/HomeCarousel.vue";
     class="w-full bg-primary justify-center items-center flex flex-col py-4 px-2 gap-2"
   >
     <div class="w-full text-white font-bold text-center">
-      <span>Crie seus eventos com a Planify agora. </span>
-      <span>A melhor plataforma do Brasil! </span>
+      <span>Crie seus eventos com a Planify agora!<br> </span>
+      <span>A melhor plataforma do Brasil. </span>
     </div>
     <div>
-      <RouterLink to="/register">
-        <Button :variant="{ variant: 'outline' }" label="CRIE SEU EVENTO" />
-      </RouterLink>
+      <Button :variant="{ variant: 'outline' }" label="CRIE SEU EVENTO" />
     </div>
   </nav>
   <main class="w-full min-h-svh bg-white">
