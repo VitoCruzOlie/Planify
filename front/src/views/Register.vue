@@ -1,9 +1,7 @@
 <script setup lang="ts">
 //Component imports
-import Input from "@/components/Input.vue";
-import Button from "@/components/Button.vue";
-//<p class="font-bold text-base  ">Crie uma conta para <br> iniciar sua experiência com Planify!</p>
-//<p class="font-light text-sm "> Faltam só mais alguns passos!<br>Nós também detestamos formulários.</p>
+import RegisterForm from "@/components/Forms/RegisterForm.vue";
+
 </script>
 <template>
   <nav
@@ -25,14 +23,7 @@ import Button from "@/components/Button.vue";
           Faltam só mais alguns passos!<br />Nós também detestamos formulários.
         </p>
       </div>
-      <form class="gap-8 flex flex-col px-10 ">
-        <div class="gap-3 flex flex-col">
-          <Input />
-          <Input />
-          <Input />
-        </div>
-        <Button label="REGISTRAR" :variant="{ variant: 'primary' }" />
-      </form>
+      <RegisterForm/>
     </div>
   </main>
 </template>

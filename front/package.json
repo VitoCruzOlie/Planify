@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@phosphor-icons/vue": "^2.2.1",
+    "@vue-hooks-form/core": "^0.0.19",
+    "@vue-hooks-form/zod": "^0.0.19",
     "@vueuse/core": "^10.9.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
@@ -23,7 +25,8 @@
     "tailwind-variants": "^0.2.1",
     "tailwindcss-animate": "^1.0.7",
     "vue": "^3.4.21",
-    "vue-router": "^4.3.0"
+    "vue-router": "^4.3.0",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@types/node": "^20.12.7",
