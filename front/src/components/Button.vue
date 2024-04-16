@@ -8,6 +8,7 @@ const button = tv({
     variant: {
       primary: "bg-primary text-white hover:brightness-110",
       outline: "bg-transparent text-white border border-white hover:border-white/50 hover:text-white/50",
+      outline_secondary: "bg-transparent text-black border border-primary hover:border-primary/50 hover:text-back/50",
     },
   },
 });

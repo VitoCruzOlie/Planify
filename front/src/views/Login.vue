@@ -1,6 +1,7 @@
 <script setup lang="ts">
 //Component imports
 import LoginForm from '@/components/Forms/LoginForm.vue';
+import Button from "@/components/Button.vue";
 
 </script>
 <template>
@@ -20,6 +21,10 @@ import LoginForm from '@/components/Forms/LoginForm.vue';
         </p>
       </div>
       <LoginForm/>
+      <div class="gap-8 flex flex-col px-10">
+      <Button label="NÃO POSSUI UMA CONTA?" :variant="{variant:'outline_secondary'}" />
+
+      </div>
     </div>
   </main>
 </template>
