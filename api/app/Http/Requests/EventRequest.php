@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Validator;
 
 class EventRequest extends FormRequest
 {
@@ -30,7 +31,9 @@ class EventRequest extends FormRequest
             ],
             "date" => [
                 "date",
-                "required"
+                "required",
+                "date_format:Y-m-d",
+                "after_or_equal:today",
             ],
         ];
     }
