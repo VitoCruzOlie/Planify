@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\UserResource;
+use App\Models\Event;
+use App\Models\EventUser;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -36,12 +38,12 @@ class UserController extends Controller
     public function show(Request $request)
     {
         try {
-            
+
             $user = $request->user();
 
             return response()->json([
                 "message" => "Sucess",
-                "data" => [new UserResource($user)]
+                "data" => new UserResource($user)
             ], Response::HTTP_OK);
 
         } catch (\Throwable $th) {
@@ -74,5 +76,25 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function confirmParticipation(Request $request)
+    {
+        try {
+            $userId = $request->user()->id;
+
+            $invite = EventUser::where('event_id', $request->id)
+                ->where('user_id', $userId)
+                ->first();
+
+            $invite->update(['confirmed' => true]);
+
+            return response()->json([
+                "message" => "Confirm invite with sucess",
+                "data" => []
+            ], Response::HTTP_OK);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 }
