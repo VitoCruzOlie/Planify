@@ -2,6 +2,7 @@
 import Button from "../components/Button.vue";
 import SearchBar from "../components/SearchBar.vue";
 import CTA from "../components/CTA.vue";
+import HomeCarousel from "../components/HomeCarousel.vue";
 </script>
 <template>
   <nav
@@ -12,7 +13,7 @@ import CTA from "../components/CTA.vue";
       <span> A melhor plataforma do Brasil! </span>
     </div>
     <div>
-      <Button :variant="{variant:'outline'}" label="CRIE SEU EVENTO" />
+      <Button :variant="{ variant: 'outline' }" label="CRIE SEU EVENTO" />
     </div>
   </nav>
   <main class="w-full min-h-svh bg-white">
@@ -22,8 +23,9 @@ import CTA from "../components/CTA.vue";
     <div class="gap-2.5 px-4 flex justify-center">
       <SearchBar />
     </div>
-    <div class="w-full">
-      <CTA/>
+    <HomeCarousel />
+    <div>
+      <CTA />
     </div>
   </main>
 </template>
