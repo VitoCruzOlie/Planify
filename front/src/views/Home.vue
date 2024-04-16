@@ -20,7 +20,7 @@ import HomeCarousel from "../components/HomeCarousel.vue";
     <div class="flex flex-row p-4">
       <h1 class="text-primary text-xl font-bold">Planify</h1>
     </div>
-    <div class="gap-2.5 px-4 flex justify-center">
+    <div class="gap-2.5 px-4 flex justify-center pb-4">
       <SearchBar />
     </div>
     <HomeCarousel />
