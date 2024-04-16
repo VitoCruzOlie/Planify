@@ -1,11 +1,38 @@
 <script setup lang="ts">
-defineProps({
-  label: String,
-})
+//Library imports
+import { tv, type VariantProps } from "tailwind-variants";
+
+const button = tv({
+  base: "font-bold py-2 px-4 rounded-lg",
+  variants: {
+    variant: {
+      primary: "bg-primary text-white",
+      outline: "bg-transparent text-white border border-white",
+    },
+  },
+  defaultVariants:{
+    variant: "primary",
+  
+  }
+});
+
+type Variants = VariantProps<typeof button>;
+type Props = {
+  variant: Variants;
+  label: string;
+};
+const props = defineProps<Props>();
 </script>
 
 <template>
-    <button class="bg-transparent text-white font-bold py-2 px-4 rounded-lg border border-white">
-        <label>{{ label }}</label>
-    </button>
+  <button
+    :class="
+      button({
+        //@ts-ignore
+        variant: props.variant,
+      })
+    "
+  >
+    <label>{{ label }}</label>
+  </button>
 </template>

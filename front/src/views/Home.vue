@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Button from "../components/Button.vue";
 import SearchBar from "../components/SearchBar.vue";
+import CTA from "../components/CTA.vue";
 </script>
 <template>
   <nav
@@ -11,7 +12,7 @@ import SearchBar from "../components/SearchBar.vue";
       <span> A melhor plataforma do Brasil! </span>
     </div>
     <div>
-      <Button label="CRIE SEU EVENTO" />
+      <Button :variant="{variant:'outline'}" label="CRIE SEU EVENTO" />
     </div>
   </nav>
   <main class="w-full min-h-svh bg-white">
@@ -20,6 +21,9 @@ import SearchBar from "../components/SearchBar.vue";
     </div>
     <div class="gap-2.5 px-4 flex justify-center">
       <SearchBar />
+    </div>
+    <div class="w-full">
+      <CTA/>
     </div>
   </main>
 </template>
