@@ -20,7 +20,7 @@ import RegisterForm from "@/components/Forms/RegisterForm.vue";
       >
         <p class="font-bold text-base">
           Crie uma conta para <br />
-          iniciar sua experiência com Planify!
+          iniciar sua experiência com Planify! 
         </p>
         <p class="font-light text-sm">
           Faltam só mais alguns passos!<br />Nós também detestamos formulários.
