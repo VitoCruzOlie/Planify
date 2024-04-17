@@ -29,6 +29,6 @@ const props = defineProps<Props>();
       })
     "
   >
-    <span>{{ label }}</span>
+    <span>{{label}}</span>
   </button>
 </template>
