@@ -1,12 +1,54 @@
-version: '3.1'
+version: "3.7"
+
 services:
-  database:
-    image: mysql
-    container_name: database-container
-    environment:
-      MYSQL_ROOT_PASSWORD: 123456g
-      MYSQL_DATABASE: planify
-      MYSQL_USER: planify
-      MYSQL_PASSWORD: 123456g
-    ports:
-      - "3300:3306"
+    # image project
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        restart: unless-stopped
+        working_dir: /var/www/
+        volumes:
+            - ./:/var/www
+        depends_on:
+            - redis
+        networks:
+            - laravel
+
+    # nginx
+    nginx:
+        image: nginx:alpine
+        restart: unless-stopped
+        ports:
+            - "8989:80"
+        volumes:
+            - ./:/var/www
+            - ./docker/nginx/:/etc/nginx/conf.d/
+        networks:
+            - laravel
+
+    # db mysql
+    db:
+        image: mysql:5.7.22
+        restart: unless-stopped
+        environment:
+            MYSQL_DATABASE: planify
+            MYSQL_ROOT_PASSWORD: 123456g
+            MYSQL_PASSWORD: 123456g
+            MYSQL_USER: planify
+        volumes:
+            - ./.docker/mysql/dbdata:/var/lib/mysql
+        ports:
+            - "3000:3306"
+        networks:
+            - laravel
+
+    # redis
+    redis:
+        image: redis:latest
+        networks:
+            - laravel
+
+networks:
+    laravel:
+        driver: bridge
