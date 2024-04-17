@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\UserResource;
 use App\Models\Event;
+use App\Models\User;
 use App\Models\EventUser;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -38,12 +39,13 @@ class UserController extends Controller
     public function show(Request $request)
     {
         try {
+            $userID = $request->user()->id;
 
-            $user = $request->user();
+            $user = User::with('events')->findOrFail($userID);
 
             return response()->json([
                 "message" => "Sucess",
-                "data" => new UserResource($user)
+                "data" => $user
             ], Response::HTTP_OK);
 
         } catch (\Throwable $th) {
@@ -95,6 +97,30 @@ class UserController extends Controller
             ], Response::HTTP_OK);
         } catch (\Throwable $th) {
             //throw $th;
+        }
+    }
+
+    public function events(Request $request)
+    {
+        try {
+            $userId = $request->user()->id;
+
+            $user = User::find($userId);
+
+            $events = $user->events()
+                ->wherePivot('confirmed', true)
+                ->get();
+
+            return response()->json([
+                "message" => "Sucess",
+                "data" => $events
+            ], Response::HTTP_OK);
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                "message" => $th->getMessage(),
+                "data" => []
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 }
