@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Input from "@/components/Input.vue";
 import Button from "@/components/Button.vue";
+import TextAreaInput from "@/components/TextAreaInput.vue";
 
 import {
   useForm,
@@ -60,7 +61,7 @@ const onError = createErrorHandler((errors) => {
       <p class="text-red-600 font-medium text-sm">
         {{ form.formState.errors.email?.message }}
       </p>
-      <Input :="form.register('password')" placeholder="Descrição" />
+      <TextAreaInput :="form.register('password')" placeholder="Descrição" />
       <p class="text-red-600 font-medium text-sm">
         {{ form.formState.errors.password?.message }}
       </p>
