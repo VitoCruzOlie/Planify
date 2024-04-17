@@ -2,7 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/Home.vue';
 import CalendarView from '../views/CalendarView.vue';
 import Register from '../views/Register.vue';
-import Login from '../views/Login.vue'
+import Login from '../views/Login.vue';
+import CreateEvent from '@/views/CreateEvent.vue';
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -27,6 +28,11 @@ const router = createRouter({
         name: 'login',
         component: Login
       },
+      {
+        path:'/create-event',
+        name: 'create-event',
+        component: CreateEvent
+      }
     ]
   })
   
