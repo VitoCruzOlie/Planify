@@ -10,7 +10,7 @@ import store from './store'
 import ToastService from 'primevue/toastservice';
 
 const app = createApp(App);
-app.use(PrimeVue);
+app.use(PrimeVue, { unstyled: true });
 app.use(router);
 app.use(VCalendar, {})
 app.use(store)

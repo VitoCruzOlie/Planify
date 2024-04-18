@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import Input from "@/components/Input.vue";
 import Button from "@/components/Button.vue";
+import TextAreaInput from "@/components/TextAreaInput.vue";
+import DateInput from "@/components/DateInput.vue";
+import InputMask from "primevue/inputmask";
 
 import {
   useForm,
@@ -11,19 +14,16 @@ import { z } from "zod";
 import { useZodResolver } from "@vue-hooks-form/zod";
 
 const schema = z.object({
- 
-  email: z.string().min(1,{
-    message: "Por favor, preencha o campo de email!",
-  }).email({
-    message: "O email informado não é válido",
+  eventName: z.string().min(3, {
+    message: "Por favor, preencha o campo de nome do evento.",
   }),
 
-  password: z.string().min(8, {
-    message: "A senha não pode possuir menos que 8 caracteres!",
+  eventDate: z.string().min(3, {
+    message: "Digite uma data válida",
   }),
-   confirmPassword: z.string().min(8, {
-    message: "A senha não pode possuir menos que 8 caracteres!",
-  })
+  eventHour: z.string().min(4, {
+    message: "Digite um horário válido",
+  }),
 });
 
 type Schema = z.infer<typeof schema>;
@@ -36,6 +36,8 @@ const onSubmit = createSubmitHandler(() => {});
 const onError = createErrorHandler((errors) => {
   console.log(errors);
 });
+
+//form.setValue('eventDate',  )
 </script>
 <template>
   <form
@@ -43,29 +45,29 @@ const onError = createErrorHandler((errors) => {
     class="gap-8 flex flex-col px-10"
   >
     <div class="gap-3 flex flex-col">
+      <Input  placeholder="Nome do evento" />
+     
+      <DateInput :="form.register('eventDate')" />
+      <p class="text-red-600 font-medium text-sm">
+        {{ form.formState.errors.eventDate?.message }}
+      </p>
+      <InputMask
+        :="form.register('eventHour')"
+        placeholder="Horário do evento"
+        mask="99:99"
+        class="flex flex-row gap-2 p-2 placeholder:text-neutral-500 text-sm border border-neutral-300 rounded-sm"
+      />
+      <p class="text-red-600 font-medium text-sm">
+        {{ form.formState.errors.eventHour?.message }}
+      </p>
+      <Input placeholder="Assunto" />
 
-      <Input :="form.register('email')" placeholder="Nome do evento" />
-      <p class="text-red-600 font-medium text-sm">
-        {{ form.formState.errors.email?.message }}
-      </p>
-      <Input :="form.register('email')" placeholder="Data do evento" />
-      <p class="text-red-600 font-medium text-sm">
-        {{ form.formState.errors.email?.message }}
-      </p>
-      <Input :="form.register('email')" placeholder="Horário do evento" />
-      <p class="text-red-600 font-medium text-sm">
-        {{ form.formState.errors.email?.message }}
-      </p>
-      <Input :="form.register('email')" placeholder="Assunto" />
-      <p class="text-red-600 font-medium text-sm">
-        {{ form.formState.errors.email?.message }}
-      </p>
-      <Input :="form.register('password')" placeholder="Descrição" />
-      <p class="text-red-600 font-medium text-sm">
-        {{ form.formState.errors.password?.message }}
-      </p>
-
+      <TextAreaInput placeholder="Descrição" />
     </div>
-    <Button class="text-2xl" label="CRIAR EVENTO" :variant="{ variant: 'primary' }" />
+    <Button
+      class="text-2xl"
+      label="CRIAR EVENTO"
+      :variant="{ variant: 'primary' }"
+    />
   </form>
 </template>

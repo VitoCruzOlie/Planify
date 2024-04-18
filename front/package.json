@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@internationalized/date": "^3.5.2",
     "@phosphor-icons/vue": "^2.2.1",
     "@popperjs/core": "^2.11.8",
     "@vue-hooks-form/core": "^0.0.19",
