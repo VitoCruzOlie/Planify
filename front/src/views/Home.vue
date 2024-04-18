@@ -3,6 +3,7 @@ import Button from "../components/Button.vue";
 import SearchBar from "../components/SearchBar.vue";
 import CTA from "../components/CTA.vue";
 import HomeCarousel from "../components/HomeCarousel.vue";
+import NavBarBottom from "../components/NavBarBottom.vue";
 
 // import { useStore } from 'vuex'
 
@@ -37,4 +38,5 @@ const isLogin = () => {
       <CTA />
     </div>
   </main>
+  <NavBarBottom v-if="isLogin()"></NavBarBottom>
 </template>
