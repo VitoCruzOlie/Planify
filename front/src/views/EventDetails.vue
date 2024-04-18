@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import DetailEventCard from "@/components/DetailEventCard.vue";
-import InviteParicipants from "@/components/InviteParticipants.vue";
+import InviteParticipants from "@/components/InviteParticipants.vue";
+import ActualParticipantSection from "@/components/ActualParticipantSection.vue";
 </script>
+
 <template>
   <nav>
     <div class="flex flex-row p-4 border-b-neutral-300 border">
@@ -19,13 +21,19 @@ import InviteParicipants from "@/components/InviteParticipants.vue";
         <div>
           <span class="text-sm font-semibold">DESCRIÇÃO DO EVENTO</span>
           <p class="text-neutral-500 text-xs line-clamp-4">
-            Lorem Ipsum é simplesmente uma simulação de texto da indústria
+            Lorem Ipsum é simplesmente uma simulação de texto da indústria
             tipográfica e de impressos, e vem sendo utilizado desde o século
             XVI, quando um impressor desconhecido pegou uma bandeja.
           </p>
         </div>
       </div>
-      <InviteParicipants />
+      <div class="mb-20" >
+        <InviteParticipants />
+      </div>
+      <div>
+      <ActualParticipantSection title="Atuais participantes" />
+      </div>
+
     </div>
   </main>
 </template>
