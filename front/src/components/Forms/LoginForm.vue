@@ -11,11 +11,15 @@ import {
 import { z } from "zod";
 import { useZodResolver } from "@vue-hooks-form/zod";
 import { useStore } from 'vuex'
+import { useRouter } from "vue-router";
 
 const emit = defineEmits(['alertError', 'alertSucess'])
 
 // STORE
 const store = useStore()
+
+// ROUTER
+const router = useRouter()
 
 // ZOD
 
@@ -45,6 +49,9 @@ const onSubmit = createSubmitHandler(async () => {
   try {
     await store.dispatch('user/login', form.getValues());
     emit('alertSucess')
+    setTimeout(() => {
+      router.push('/');
+    }, 3000)
   } catch (error) {
     emit('alertError')
   }
