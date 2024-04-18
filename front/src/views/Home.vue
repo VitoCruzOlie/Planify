@@ -3,11 +3,20 @@ import Button from "../components/Button.vue";
 import SearchBar from "../components/SearchBar.vue";
 import CTA from "../components/CTA.vue";
 import HomeCarousel from "../components/HomeCarousel.vue";
+
+// import { useStore } from 'vuex'
+
+// const store = useStore();
+
+const isLogin = () => {
+  if (localStorage.getItem("token")) return true
+  return false
+}
+
+// store.dispatch('event/getAllEvents')
 </script>
 <template>
-  <nav
-    class="w-full bg-primary justify-center items-center flex flex-col py-4 px-2 gap-2"
-  >
+  <nav v-if="!isLogin()" class="w-full bg-primary justify-center items-center flex flex-col py-4 px-2 gap-2">
     <div class="w-full text-white font-bold text-center">
       <span>Crie seus eventos com a Planify agora!<br> </span>
       <span>A melhor plataforma do Brasil. </span>
@@ -23,7 +32,7 @@ import HomeCarousel from "../components/HomeCarousel.vue";
     <div class="gap-2.5 px-4 flex justify-center pb-4">
       <SearchBar />
     </div>
-    <HomeCarousel />
+    <HomeCarousel v-if="isLogin()" />
     <div>
       <CTA />
     </div>
