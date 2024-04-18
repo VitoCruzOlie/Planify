@@ -19,9 +19,9 @@ const schema = z.object({
     message: "Por favor, preencha o campo de nome do evento.",
   }),
 
-  eventDate: z.string().min(3, {
-    message: "Digite uma data válida",
-  }),
+  eventDate: z.coerce.date(
+
+  ),
   eventHour: z.string().min(4, {
     message: "Digite um horário válido",
   }),
@@ -33,17 +33,19 @@ const form = useForm<Schema>({
   resolver: useZodResolver(schema),
 });
 
-const onSubmit = createSubmitHandler(() => {});
+const onSubmit = createSubmitHandler((batata) => {
+  console.log(batata)
+});
 const onError = createErrorHandler((errors) => {
   console.log(errors);
 });
 
 function handleCalendar(dateValue:DateValue){
-  form.setValue('eventDate', dateValue.toString());
+  form.setValue("eventDate", dateValue.toString());
   console.log(dateValue.toString());
 }
 
-//form.setValue('eventDate',  )
+
 </script>
 <template>
   <form
