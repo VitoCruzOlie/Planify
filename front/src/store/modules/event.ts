@@ -21,6 +21,7 @@ const actions = {
             commit('pushUserEvents', response)
         } catch (error) {
             console.log(error)
+            throw error
         }
     },
     async getAllEvents({ commit }) {
