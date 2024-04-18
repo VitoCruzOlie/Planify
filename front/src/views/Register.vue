@@ -1,11 +1,21 @@
 <script setup lang="ts">
 //Component imports
 import RegisterForm from "@/components/Forms/RegisterForm.vue";
+import Toast from 'primevue/toast';
+import { useToast } from 'primevue/usetoast';
+
+const toast = useToast();
+
+const showAlertError = () => {
+  toast.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao criar uma conta', life: 3000 });
+};
+const showAlertSucess = () => {
+  toast.add({ severity: 'success', summary: 'Sucesso', detail: 'Usuário criado com sucesso', life: 3000 });
+};
+
 </script>
 <template>
-  <nav
-    class="w-full flex flex-row justify-between p-2 items-center border border-b-neutral-300 shadow-md shadow-black"
-  >
+  <nav class="w-full flex flex-row justify-between p-2 items-center border border-b-neutral-300 shadow-md shadow-black">
     <h1 class="text-primary text-xl font-bold">Planify</h1>
     <RouterLink to="/login">
       <button class="font-bold text-xs">
@@ -14,19 +24,18 @@ import RegisterForm from "@/components/Forms/RegisterForm.vue";
     </RouterLink>
   </nav>
   <main class="w-full min-h-svh bg-white">
+    <Toast class="w-3/4" />
     <div class="w-full flex flex-col gap-7">
-      <div
-        class="flex flex-col gap-2 justify-center items-center text-center pt-16"
-      >
+      <div class="flex flex-col gap-2 justify-center items-center text-center pt-16">
         <p class="font-bold text-base">
           Crie uma conta para <br />
-          iniciar sua experiência com Planify! 
+          iniciar sua experiência com Planify!
         </p>
         <p class="font-light text-sm">
           Faltam só mais alguns passos!<br />Nós também detestamos formulários.
         </p>
       </div>
-      <RegisterForm />
+      <RegisterForm @alertSucess="showAlertSucess" @alertError="showAlertError" />
     </div>
   </main>
 </template>

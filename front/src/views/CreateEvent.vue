@@ -1,6 +1,7 @@
 <script setup lang="ts">
 //Component imports
 import CreateEventForm from "@/components/Forms/CreateEventForm.vue";
+import NavBarBottom from "@/components/NavBarBottom.vue";
 </script>
 <template>
   <nav
@@ -8,7 +9,7 @@ import CreateEventForm from "@/components/Forms/CreateEventForm.vue";
   >
     <h1 class="text-primary text-xl font-bold">Planify</h1>
   </nav>
-  <main class="w-full min-h-svh bg-white">
+  <main class="w-full h-full bg-white mb-20">
     <div class="w-full flex flex-col gap-7">
       <div
         class="flex flex-col gap-2 justify-center items-center text-center pt-16"
@@ -21,4 +22,6 @@ import CreateEventForm from "@/components/Forms/CreateEventForm.vue";
       <CreateEventForm />
     </div>
   </main>
+
+  <NavBarBottom></NavBarBottom>
 </template>
