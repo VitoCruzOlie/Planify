@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Calendar as CalendarIcon } from 'lucide-vue-next'
 
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
@@ -17,27 +17,11 @@ import {
   getLocalTimeZone,
 } from '@internationalized/date'
 
-const emit = defineEmits(['submitValue'])
-
 const df = new DateFormatter('pt-BR', {
   dateStyle: 'long',
 });
 
 const value = ref<DateValue>()
-
-const submitValue = () => {
-  if (value.value) {
-    const month = ('0' + value.value.month).slice(-2)
-    const day = ('0' + value.value.day).slice(-2)
-    const formattedDate = `${value.value.year}-${month}-${day}`
-    emit('submitValue', formattedDate);
-  }
-};
-
-watch(value, () => {
-  submitValue()
-})
-
 </script>
 
 <template>

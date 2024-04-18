@@ -13,6 +13,7 @@ import {
 import { z } from "zod";
 import { useZodResolver } from "@vue-hooks-form/zod";
 import { useStore } from 'vuex'
+import { DateValue } from "@internationalized/date";
 import { useRouter } from "vue-router";
 
 const emit = defineEmits(['alertError', 'alertSucess'])
@@ -26,6 +27,19 @@ const store = useStore()
 const schema = z.object({
   eventName: z.string().min(3, {
     message: "Por favor, preencha o campo de nome do evento.",
+  }),
+  eventDate: z.coerce.date({
+    description: "Digite uma data válida",
+    errorMap: (issue, _ctx) => {
+      if (issue.code === "invalid_type") {
+        return { message: "Digite uma data válida" }
+      }
+      return { message: "Digite uma data válida" }
+    },
+  }).refine((date) => {
+    return date > new Date();
+  }, {
+    message: "Digite uma data futura",
   }),
   eventHour: z.string().min(4, {
     message: "Digite um horário válido",
@@ -47,7 +61,8 @@ const form = useForm<Schema>({
 let date = ''
 
 
-const onSubmit = createSubmitHandler(async () => {
+const onSubmit = createSubmitHandler(async (batata) => {
+  console.log(batata)
   try {
     let event = {
       name: form.getValues().eventName,
@@ -67,11 +82,10 @@ const onError = createErrorHandler((errors) => {
   console.log(errors);
 });
 
-const teste = (event) => {
-  date = event
+function handleCalendar(dateValue: DateValue) {
+  form.setValue("eventDate", dateValue.toString());
+  console.log(dateValue.toString());
 }
-
-//form.setValue('eventDate',  )
 </script>
 <template>
   <form @submit.prevent="form.handleSubmit(onSubmit, onError)()" class="gap-8 flex flex-col px-10">
@@ -80,7 +94,8 @@ const teste = (event) => {
       <p class="text-red-600 font-medium text-sm">
         {{ form.formState.errors.eventName?.message }}
       </p>
-      <DateInput @submitValue="teste" />
+      < <DateInput :onChange="handleCalendar" />
+      <input :="form.register('eventDate')" class="hidden" />
       <p class="text-red-600 font-medium text-sm">
       </p>
       <InputMask :="form.register('eventHour')" placeholder="Horário do evento" mask="99:99"
