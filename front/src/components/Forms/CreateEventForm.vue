@@ -13,6 +13,16 @@ import {
 import { z } from "zod";
 import { useZodResolver } from "@vue-hooks-form/zod";
 import { DateValue } from "@internationalized/date";
+import { useStore } from 'vuex'
+import { useRouter } from "vue-router";
+
+const emit = defineEmits(['alertError', 'alertSucess'])
+
+// STORE
+const store = useStore()
+
+// ROUTER
+const router = useRouter()
 
 const schema = z.object({
   eventName: z.string().min(3, {
@@ -36,6 +46,12 @@ const schema = z.object({
   eventHour: z.string().min(4, {
     message: "Digite um horário válido",
   }),
+  eventSubject: z.string().min(0, {
+    message: "",
+  }),
+  eventDescription: z.string().min(0, {
+    message: "",
+  }),
 });
 
 type Schema = z.infer<typeof schema>;
@@ -44,14 +60,27 @@ const form = useForm<Schema>({
   resolver: useZodResolver(schema),
 });
 
-const onSubmit = createSubmitHandler((batata) => {
-  console.log(batata)
+const onSubmit = createSubmitHandler(async () => {
+  try {
+    let event = {
+      name: form.getValues().eventName,
+      time: form.getValues().eventHour,
+      date: form.getValues().eventDate,
+      subject: form.getValues().eventSubject,
+      description: form.getValues().eventDescription,
+    }
+
+    await store.dispatch('event/createEvent', event)
+    emit('alertSucess')
+  } catch (error) {
+    emit('alertError')
+  }
 });
-const onError = createErrorHandler((errors) => {
-  console.log(errors);
+const onError = createErrorHandler(() => {
+  emit('alertError')
 });
 
-function handleCalendar(dateValue:DateValue){
+function handleCalendar(dateValue: DateValue) {
   form.setValue("eventDate", dateValue.toString());
   console.log(dateValue.toString());
 }
@@ -59,37 +88,26 @@ function handleCalendar(dateValue:DateValue){
 
 </script>
 <template>
-  <form
-    @submit.prevent="form.handleSubmit(onSubmit, onError)()"
-    class="gap-8 flex flex-col px-10"
-  >
+  <form @submit.prevent="form.handleSubmit(onSubmit, onError)()" class="gap-8 flex flex-col px-10">
     <div class="gap-3 flex flex-col">
       <Input :="form.register('eventName')" placeholder="Nome do evento" />
       <p class="text-red-600 font-medium text-sm">
         {{ form.formState.errors.eventName?.message }}
       </p>
-      <DateInput :onChange="handleCalendar"  />
-      <input :="form.register('eventDate')" class="hidden"/>
+      <DateInput :onChange="handleCalendar" />
+      <input :="form.register('eventDate')" class="hidden" />
       <p class="text-red-600 font-medium text-sm">
         {{ form.formState.errors.eventDate?.message }}
       </p>
-      <InputMask
-        :="form.register('eventHour')"
-        placeholder="Horário do evento"
-        mask="99:99"
-        class="flex flex-row gap-2 p-2 placeholder:text-neutral-500 text-sm border border-neutral-300 rounded-sm"
-      />
+      <InputMask :="form.register('eventHour')" placeholder="Horário do evento" mask="99:99"
+        class="flex flex-row gap-2 p-2 placeholder:text-neutral-500 text-sm border border-neutral-300 rounded-sm" />
       <p class="text-red-600 font-medium text-sm">
         {{ form.formState.errors.eventHour?.message }}
       </p>
-      <Input placeholder="Assunto" />
+      <Input :="form.register('eventSubject')" placeholder="Assunto" />
 
-      <TextAreaInput placeholder="Descrição" />
+      <TextAreaInput :="form.register('eventDescription')" placeholder="Descrição" />
     </div>
-    <Button
-      class="text-2xl"
-      label="CRIAR EVENTO"
-      :variant="{ variant: 'primary' }"
-    />
+    <Button class="text-2xl" label="CRIAR EVENTO" :variant="{ variant: 'primary' }" />
   </form>
 </template>
