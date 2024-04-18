@@ -2,7 +2,8 @@
 import Input from "@/components/Input.vue";
 import Button from "@/components/Button.vue";
 import TextAreaInput from "@/components/TextAreaInput.vue";
-import DateInput from "@/components/DateInput.vue"
+import DateInput from "@/components/DateInput.vue";
+import InputMask from "primevue/inputmask";
 
 import {
   useForm,
@@ -13,24 +14,16 @@ import { z } from "zod";
 import { useZodResolver } from "@vue-hooks-form/zod";
 
 const schema = z.object({
- 
-  eventName: z.string().min(3,{
+  eventName: z.string().min(3, {
     message: "Por favor, preencha o campo de nome do evento.",
   }),
 
-  eventDate: z.string().min(8, {
+  eventDate: z.string().min(3, {
     message: "Digite uma data válida",
   }),
-   eventHour: z.string().min(8, {
+  eventHour: z.string().min(4, {
     message: "Digite um horário válido",
   }),
-  eventSubject: z.string().min(3, {
-    message: "Por favor, preencha o campo de assunto.",
-  }),
-  eventDescription: z.string().min(3, {
-    message: "Por favor, preencha o campo de descrição.",
-  }),
-
 });
 
 type Schema = z.infer<typeof schema>;
@@ -43,6 +36,8 @@ const onSubmit = createSubmitHandler(() => {});
 const onError = createErrorHandler((errors) => {
   console.log(errors);
 });
+
+//form.setValue('eventDate',  )
 </script>
 <template>
   <form
@@ -50,26 +45,29 @@ const onError = createErrorHandler((errors) => {
     class="gap-8 flex flex-col px-10"
   >
     <div class="gap-3 flex flex-col">
-
-      <Input :="form.register('eventName')" placeholder="Nome do evento" />
+      <Input  placeholder="Nome do evento" />
+     
+      <DateInput :="form.register('eventDate')" />
       <p class="text-red-600 font-medium text-sm">
-        {{ form.formState.errors.eventName?.message }}
+        {{ form.formState.errors.eventDate?.message }}
       </p>
-      <DateInput/>
-      <Input :="form.register('eventHour')" placeholder="Horário do evento" />
+      <InputMask
+        :="form.register('eventHour')"
+        placeholder="Horário do evento"
+        mask="99:99"
+        class="flex flex-row gap-2 p-2 placeholder:text-neutral-500 text-sm border border-neutral-300 rounded-sm"
+      />
       <p class="text-red-600 font-medium text-sm">
         {{ form.formState.errors.eventHour?.message }}
       </p>
-      <Input :="form.register('eventSubject')" placeholder="Assunto" />
-      <p class="text-red-600 font-medium text-sm">
-        {{ form.formState.errors.eventSubject?.message }}
-      </p>
-      <TextAreaInput :="form.register('eventDescription')" placeholder="Descrição" />
-      <p class="text-red-600 font-medium text-sm">
-        {{ form.formState.errors.eventDescription?.message }}
-      </p>
+      <Input placeholder="Assunto" />
 
+      <TextAreaInput placeholder="Descrição" />
     </div>
-    <Button class="text-2xl" label="CRIAR EVENTO" :variant="{ variant: 'primary' }" />
+    <Button
+      class="text-2xl"
+      label="CRIAR EVENTO"
+      :variant="{ variant: 'primary' }"
+    />
   </form>
 </template>

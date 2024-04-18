@@ -21,7 +21,6 @@ const df = new DateFormatter('pt-BR', {
   dateStyle: 'long',
 });
 
-
 const value = ref<DateValue>()
 
 </script>
@@ -32,11 +31,11 @@ const value = ref<DateValue>()
       <Button
         :variant="'outline'"
         :class="cn(
-          'flex flex-row gap-2 p-2  placeholder:text-neutral-500 text-sm border border-neutral-300 rounded-sm',
+          'flex flex-row gap-2 p-2  placeholder:text-neutral-500 text-sm border border-neutral-300 rounded-sm justify-start',
           !value && 'text-muted-foreground',
         )"
       >
-        <CalendarIcon class="mr-2 h-4 w-4" />
+        <CalendarIcon class=" h-4 w-4" />
         <span>{{ value ? df.format(value.toDate(getLocalTimeZone())) : "Selecione uma data" }}</span>
       </Button>
     </PopoverTrigger>
