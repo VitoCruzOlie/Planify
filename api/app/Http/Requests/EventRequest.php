@@ -35,6 +35,10 @@ class EventRequest extends FormRequest
                 "date_format:Y-m-d",
                 "after_or_equal:today",
             ],
+            "subject" => [
+            ],
+            "description" => [
+            ]
         ];
     }
 }
