@@ -12,15 +12,27 @@ import {
 } from "@vue-hooks-form/core";
 import { z } from "zod";
 import { useZodResolver } from "@vue-hooks-form/zod";
+import { DateValue } from "@internationalized/date";
 
 const schema = z.object({
   eventName: z.string().min(3, {
     message: "Por favor, preencha o campo de nome do evento.",
   }),
 
-  eventDate: z.string().min(3, {
-    message: "Digite uma data válida",
+  eventDate: z.coerce.date({
+    description: "Digite uma data válida",
+    errorMap: (issue, _ctx) => {
+      if (issue.code === "invalid_type") {
+        return { message: "Digite uma data válida" }
+      }
+      return { message: "Digite uma data válida" }
+    },
+  }).refine((date) => {
+    return date > new Date();
+  }, {
+    message: "Digite uma data futura",
   }),
+
   eventHour: z.string().min(4, {
     message: "Digite um horário válido",
   }),
@@ -32,12 +44,19 @@ const form = useForm<Schema>({
   resolver: useZodResolver(schema),
 });
 
-const onSubmit = createSubmitHandler(() => {});
+const onSubmit = createSubmitHandler((batata) => {
+  console.log(batata)
+});
 const onError = createErrorHandler((errors) => {
   console.log(errors);
 });
 
-//form.setValue('eventDate',  )
+function handleCalendar(dateValue:DateValue){
+  form.setValue("eventDate", dateValue.toString());
+  console.log(dateValue.toString());
+}
+
+
 </script>
 <template>
   <form
@@ -45,9 +64,12 @@ const onError = createErrorHandler((errors) => {
     class="gap-8 flex flex-col px-10"
   >
     <div class="gap-3 flex flex-col">
-      <Input  placeholder="Nome do evento" />
-     
-      <DateInput :="form.register('eventDate')" />
+      <Input :="form.register('eventName')" placeholder="Nome do evento" />
+      <p class="text-red-600 font-medium text-sm">
+        {{ form.formState.errors.eventName?.message }}
+      </p>
+      <DateInput :onChange="handleCalendar"  />
+      <input :="form.register('eventDate')" class="hidden"/>
       <p class="text-red-600 font-medium text-sm">
         {{ form.formState.errors.eventDate?.message }}
       </p>
