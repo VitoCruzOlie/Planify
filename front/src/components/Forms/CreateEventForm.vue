@@ -2,6 +2,7 @@
 import Input from "@/components/Input.vue";
 import Button from "@/components/Button.vue";
 import TextAreaInput from "@/components/TextAreaInput.vue";
+import DateInput from "@/components/DateInput.vue"
 
 import {
   useForm,
@@ -54,10 +55,7 @@ const onError = createErrorHandler((errors) => {
       <p class="text-red-600 font-medium text-sm">
         {{ form.formState.errors.eventName?.message }}
       </p>
-      <Input :="form.register('eventDate')" placeholder="Data do evento" />
-      <p class="text-red-600 font-medium text-sm">
-        {{ form.formState.errors.eventDate?.message }}
-      </p>
+      <DateInput/>
       <Input :="form.register('eventHour')" placeholder="Horário do evento" />
       <p class="text-red-600 font-medium text-sm">
         {{ form.formState.errors.eventHour?.message }}

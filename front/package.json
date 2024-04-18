@@ -9,11 +9,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@internationalized/date": "^3.5.2",
     "@phosphor-icons/vue": "^2.2.1",
+    "@popperjs/core": "^2.11.8",
     "@vue-hooks-form/core": "^0.0.19",
     "@vue-hooks-form/zod": "^0.0.19",
     "@vueuse/core": "^10.9.0",
-    "@popperjs/core": "^2.11.8",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "embla-carousel": "^8.0.2",
