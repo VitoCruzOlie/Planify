@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Calendar as CalendarIcon } from 'lucide-vue-next'
 
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
@@ -21,7 +21,19 @@ const df = new DateFormatter('pt-BR', {
   dateStyle: 'long',
 });
 
-const value = ref<DateValue>()
+type Props = {
+  onChange: (value: DateValue) => void,
+}
+
+const props = defineProps<Props>();
+
+const value = ref<DateValue>();
+
+watch(value, (newValue) => {
+  if(newValue){
+    props.onChange(newValue);
+  }
+});
 
 </script>
 

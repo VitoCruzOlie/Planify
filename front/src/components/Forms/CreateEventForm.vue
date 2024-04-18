@@ -12,6 +12,7 @@ import {
 } from "@vue-hooks-form/core";
 import { z } from "zod";
 import { useZodResolver } from "@vue-hooks-form/zod";
+import { DateValue } from "@internationalized/date";
 
 const schema = z.object({
   eventName: z.string().min(3, {
@@ -37,6 +38,11 @@ const onError = createErrorHandler((errors) => {
   console.log(errors);
 });
 
+function handleCalendar(dateValue:DateValue){
+  form.setValue('eventDate', dateValue.toString());
+  console.log(dateValue.toString());
+}
+
 //form.setValue('eventDate',  )
 </script>
 <template>
@@ -45,9 +51,11 @@ const onError = createErrorHandler((errors) => {
     class="gap-8 flex flex-col px-10"
   >
     <div class="gap-3 flex flex-col">
-      <Input  placeholder="Nome do evento" />
-     
-      <DateInput :="form.register('eventDate')" />
+      <Input :="form.register('eventName')" placeholder="Nome do evento" />
+      <p class="text-red-600 font-medium text-sm">
+        {{ form.formState.errors.eventName?.message }}
+      </p>
+      <DateInput :onChange="handleCalendar"  />
       <p class="text-red-600 font-medium text-sm">
         {{ form.formState.errors.eventDate?.message }}
       </p>
