@@ -2,6 +2,7 @@
 import DetailEventCard from "@/components/DetailEventCard.vue";
 import InviteParticipants from "@/components/InviteParticipants.vue";
 import ActualParticipantSection from "@/components/ActualParticipantSection.vue";
+import PendingParticipantSection from "@/components/PendingParticipantSection.vue";
 </script>
 
 <template>
@@ -30,8 +31,9 @@ import ActualParticipantSection from "@/components/ActualParticipantSection.vue"
       <div class="mb-20" >
         <InviteParticipants />
       </div>
-      <div>
-      <ActualParticipantSection title="Atuais participantes" />
+      <div class="flex flex-col gap-8" >
+      <ActualParticipantSection title="Participantes atuais" />
+      <PendingParticipantSection title="Participantes pendentes" />
       </div>
 
     </div>
