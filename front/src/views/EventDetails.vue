@@ -11,7 +11,7 @@ import InviteParicipants from "@/components/InviteParticipants.vue";
   <main class="w-full min-h-svh bg-white">
     <div class="gap-2.5 px-4 flex flex-col justify-center pb-4">
       <DetailEventCard title="Reunião Top" date="18/04/2024" hour="21:20" />
-      <div class="pl-3 flex flex-col gap-4">
+      <div class="pl-3 flex flex-col gap-4 pb-11">
         <div>
           <span class="text-sm font-semibold">ASSUNTO</span>
           <p class="text-neutral-500 text-xs">Reunião organizacional</p>
