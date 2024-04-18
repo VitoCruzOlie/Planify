@@ -12,8 +12,8 @@ import {
 } from "@vue-hooks-form/core";
 import { z } from "zod";
 import { useZodResolver } from "@vue-hooks-form/zod";
-import { useStore } from 'vuex'
 import { DateValue } from "@internationalized/date";
+import { useStore } from 'vuex'
 import { useRouter } from "vue-router";
 
 const emit = defineEmits(['alertError', 'alertSucess'])
@@ -22,12 +22,13 @@ const emit = defineEmits(['alertError', 'alertSucess'])
 const store = useStore()
 
 // ROUTER
-// const router = useRouter()
+const router = useRouter()
 
 const schema = z.object({
   eventName: z.string().min(3, {
     message: "Por favor, preencha o campo de nome do evento.",
   }),
+
   eventDate: z.coerce.date({
     description: "Digite uma data válida",
     errorMap: (issue, _ctx) => {
@@ -41,13 +42,14 @@ const schema = z.object({
   }, {
     message: "Digite uma data futura",
   }),
+
   eventHour: z.string().min(4, {
     message: "Digite um horário válido",
   }),
-  eventSubject: z.string().min(1, {
+  eventSubject: z.string().min(0, {
     message: "",
   }),
-  eventDescription: z.string().min(1, {
+  eventDescription: z.string().min(0, {
     message: "",
   }),
 });
@@ -58,16 +60,12 @@ const form = useForm<Schema>({
   resolver: useZodResolver(schema),
 });
 
-let date = ''
-
-
-const onSubmit = createSubmitHandler(async (batata) => {
-  console.log(batata)
+const onSubmit = createSubmitHandler(async () => {
   try {
     let event = {
       name: form.getValues().eventName,
       time: form.getValues().eventHour,
-      date: date,
+      date: form.getValues().eventDate,
       subject: form.getValues().eventSubject,
       description: form.getValues().eventDescription,
     }
@@ -78,14 +76,16 @@ const onSubmit = createSubmitHandler(async (batata) => {
     emit('alertError')
   }
 });
-const onError = createErrorHandler((errors) => {
-  console.log(errors);
+const onError = createErrorHandler(() => {
+  emit('alertError')
 });
 
 function handleCalendar(dateValue: DateValue) {
   form.setValue("eventDate", dateValue.toString());
   console.log(dateValue.toString());
 }
+
+
 </script>
 <template>
   <form @submit.prevent="form.handleSubmit(onSubmit, onError)()" class="gap-8 flex flex-col px-10">
@@ -94,9 +94,10 @@ function handleCalendar(dateValue: DateValue) {
       <p class="text-red-600 font-medium text-sm">
         {{ form.formState.errors.eventName?.message }}
       </p>
-      < <DateInput :onChange="handleCalendar" />
+      <DateInput :onChange="handleCalendar" />
       <input :="form.register('eventDate')" class="hidden" />
       <p class="text-red-600 font-medium text-sm">
+        {{ form.formState.errors.eventDate?.message }}
       </p>
       <InputMask :="form.register('eventHour')" placeholder="Horário do evento" mask="99:99"
         class="flex flex-row gap-2 p-2 placeholder:text-neutral-500 text-sm border border-neutral-300 rounded-sm" />

@@ -13,7 +13,7 @@ const showAlertError = () => {
   toast.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao criar evento', life: 3000 });
 };
 const showAlertSucess = () => {
-  toast.add({ severity: 'success', summary: 'Sucesso', detail: 'Evento criado com sucesso', life: 3000 });
+  toast.add({ severity: 'success', summary: 'Sucesso', detail: 'Usuário criado com sucesso', life: 3000 });
 };
 
 </script>
