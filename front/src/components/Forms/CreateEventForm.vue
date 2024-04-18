@@ -12,17 +12,29 @@ import {
 } from "@vue-hooks-form/core";
 import { z } from "zod";
 import { useZodResolver } from "@vue-hooks-form/zod";
+import { useStore } from 'vuex'
+import { useRouter } from "vue-router";
+
+const emit = defineEmits(['alertError', 'alertSucess'])
+
+// STORE
+const store = useStore()
+
+// ROUTER
+// const router = useRouter()
 
 const schema = z.object({
   eventName: z.string().min(3, {
     message: "Por favor, preencha o campo de nome do evento.",
   }),
-
-  eventDate: z.string().min(3, {
-    message: "Digite uma data válida",
-  }),
   eventHour: z.string().min(4, {
     message: "Digite um horário válido",
+  }),
+  eventSubject: z.string().min(1, {
+    message: "",
+  }),
+  eventDescription: z.string().min(1, {
+    message: "",
   }),
 });
 
@@ -32,42 +44,54 @@ const form = useForm<Schema>({
   resolver: useZodResolver(schema),
 });
 
-const onSubmit = createSubmitHandler(() => {});
+let date = ''
+
+
+const onSubmit = createSubmitHandler(async () => {
+  try {
+    let event = {
+      name: form.getValues().eventName,
+      time: form.getValues().eventHour,
+      date: date,
+      subject: form.getValues().eventSubject,
+      description: form.getValues().eventDescription,
+    }
+
+    await store.dispatch('event/createEvent', event)
+    emit('alertSucess')
+  } catch (error) {
+    emit('alertError')
+  }
+});
 const onError = createErrorHandler((errors) => {
   console.log(errors);
 });
 
+const teste = (event) => {
+  date = event
+}
+
 //form.setValue('eventDate',  )
 </script>
 <template>
-  <form
-    @submit.prevent="form.handleSubmit(onSubmit, onError)()"
-    class="gap-8 flex flex-col px-10"
-  >
+  <form @submit.prevent="form.handleSubmit(onSubmit, onError)()" class="gap-8 flex flex-col px-10">
     <div class="gap-3 flex flex-col">
-      <Input  placeholder="Nome do evento" />
-     
-      <DateInput :="form.register('eventDate')" />
+      <Input :="form.register('eventName')" placeholder="Nome do evento" />
       <p class="text-red-600 font-medium text-sm">
-        {{ form.formState.errors.eventDate?.message }}
+        {{ form.formState.errors.eventName?.message }}
       </p>
-      <InputMask
-        :="form.register('eventHour')"
-        placeholder="Horário do evento"
-        mask="99:99"
-        class="flex flex-row gap-2 p-2 placeholder:text-neutral-500 text-sm border border-neutral-300 rounded-sm"
-      />
+      <DateInput @submitValue="teste" />
+      <p class="text-red-600 font-medium text-sm">
+      </p>
+      <InputMask :="form.register('eventHour')" placeholder="Horário do evento" mask="99:99"
+        class="flex flex-row gap-2 p-2 placeholder:text-neutral-500 text-sm border border-neutral-300 rounded-sm" />
       <p class="text-red-600 font-medium text-sm">
         {{ form.formState.errors.eventHour?.message }}
       </p>
-      <Input placeholder="Assunto" />
+      <Input :="form.register('eventSubject')" placeholder="Assunto" />
 
-      <TextAreaInput placeholder="Descrição" />
+      <TextAreaInput :="form.register('eventDescription')" placeholder="Descrição" />
     </div>
-    <Button
-      class="text-2xl"
-      label="CRIAR EVENTO"
-      :variant="{ variant: 'primary' }"
-    />
+    <Button class="text-2xl" label="CRIAR EVENTO" :variant="{ variant: 'primary' }" />
   </form>
 </template>

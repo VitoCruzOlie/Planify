@@ -41,7 +41,7 @@ async function load() {
                 })
 
                 events.value.push(e);
-                showSkeleton.value = false
+                showSkeleton.value = false;
                 return
             })
         }
