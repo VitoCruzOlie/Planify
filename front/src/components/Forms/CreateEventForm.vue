@@ -19,9 +19,20 @@ const schema = z.object({
     message: "Por favor, preencha o campo de nome do evento.",
   }),
 
-  eventDate: z.coerce.date(
+  eventDate: z.coerce.date({
+    description: "Digite uma data válida",
+    errorMap: (issue, _ctx) => {
+      if (issue.code === "invalid_type") {
+        return { message: "Digite uma data válida" }
+      }
+      return { message: "Digite uma data válida" }
+    },
+  }).refine((date) => {
+    return date > new Date();
+  }, {
+    message: "Digite uma data futura",
+  }),
 
-  ),
   eventHour: z.string().min(4, {
     message: "Digite um horário válido",
   }),
@@ -58,6 +69,7 @@ function handleCalendar(dateValue:DateValue){
         {{ form.formState.errors.eventName?.message }}
       </p>
       <DateInput :onChange="handleCalendar"  />
+      <input :="form.register('eventDate')" class="hidden"/>
       <p class="text-red-600 font-medium text-sm">
         {{ form.formState.errors.eventDate?.message }}
       </p>
