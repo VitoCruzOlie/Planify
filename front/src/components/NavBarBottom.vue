@@ -10,14 +10,14 @@ let actualRoute = router.currentRoute.value.path
 </script>
 
 <template>
-    <nav  class="bg-primary">
+    <nav  class="bg-primary flex fixed bottom-0 items-center w-full h-20 border-t-rounded-lg place-content-around">
         <router-link to="/">
             <PhHouse :size="40" :color="actualRoute === '/' ? '#000000' : '#F7F9FB'" />
         </router-link>
         <router-link to="/calendar">
             <PhCalendar :size="40" :color="actualRoute === '/calendar' ? '#000000' : '#F7F9FB'" />
         </router-link>
-        <router-link to="/user">
+        <router-link to="/edit-user">
             <PhUserCircle :size="40" :color="actualRoute === '/user' ? '#000000' : '#F7F9FB'" />
         </router-link>
         <router-link to="/create-event">
@@ -27,15 +27,5 @@ let actualRoute = router.currentRoute.value.path
 </template>
 
 <style scoped>
-nav {
-    display: flex;
-    position: fixed;
-    bottom: 0;
-    justify-content: space-around;
-    align-items: center;
-    width: 100%;
-    height: 5rem;
-    border-top-left-radius: 28px;
-    border-top-right-radius: 28px;
-}
+
 </style>
