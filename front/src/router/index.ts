@@ -5,6 +5,7 @@ import Register from "../views/Register.vue";
 import Login from "../views/Login.vue";
 import CreateEvent from "@/views/CreateEvent.vue";
 import EventDetails from "@/views/EventDetails.vue";
+import EditUser from "@/views/EditUser.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,6 +39,11 @@ const router = createRouter({
       path: "/event-details/:id",
       name: "event-details",
       component: EventDetails,
+    },
+    {
+      path: "/edit-user",
+      name: "edit-user",
+      component: EditUser,
     },
   ],
 });
