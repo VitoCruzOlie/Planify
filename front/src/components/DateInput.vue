@@ -43,7 +43,7 @@ watch(value, (newValue) => {
       <Button
         :variant="'outline'"
         :class="cn(
-          'flex flex-row gap-2 p-2  placeholder:text-neutral-500 text-sm border border-neutral-300 rounded-sm justify-start',
+          'flex flex-row gap-2 p-2  placeholder:text-neutral-500 text-sm border border-neutral-300 rounded-sm justify-start focus:border-primary',
           !value && 'text-muted-foreground',
         )"
       >
