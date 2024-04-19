@@ -7,8 +7,6 @@ import Skeleton from 'primevue/skeleton';
 import { ref } from 'vue';
 import { useStore } from 'vuex'
 
-const emit = defineEmits(['alertError'])
-
 const store = useStore();
 
 let attrs = ref([
@@ -29,6 +27,9 @@ async function load() {
 
         if (store.getters['event/userEvents']) {
             store.getters['event/userEvents'].forEach(e => {
+                let date = e.date
+                const [year, month, day] = date.split('-');
+
                 attrs.value.push({
                     dot: true,
                     popover: {
@@ -37,7 +38,7 @@ async function load() {
                         hideIndicator: true,
                     },
                     content: "blue",
-                    dates: [new Date(e.date)]
+                    dates: [new Date(year, month - 1, day)]
                 })
 
                 events.value.push(e);
@@ -56,8 +57,7 @@ load()
 </script>
 
 <template>
-    <nav
-        class="w-full flex flex-row justify-between p-4 items-center">
+    <nav class="w-full flex flex-row justify-between p-4 items-center">
         <h1 class="text-primary text-xl font-bold">Planify</h1>
     </nav>
     <main class="p-4 flex justify-center flex-col mb-20">

@@ -5,9 +5,6 @@ import CTA from "../components/CTA.vue";
 import HomeCarousel from "../components/HomeCarousel.vue";
 import NavBarBottom from "../components/NavBarBottom.vue";
 
-// import { useStore } from 'vuex'
-
-// const store = useStore();
 
 const isLogin = () => {
   if (localStorage.getItem("token")) return true
@@ -35,7 +32,7 @@ const isLogin = () => {
     </div>
     <HomeCarousel v-if="isLogin()" />
     <div>
-      <CTA />
+      <CTA v-if="!isLogin()" />
     </div>
   </main>
   <NavBarBottom v-if="isLogin()"></NavBarBottom>

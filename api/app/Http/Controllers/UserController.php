@@ -123,4 +123,27 @@ class UserController extends Controller
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
+
+    public function eventsInvites(Request $request) {
+        try {
+            $userId = $request->user()->id;
+
+            $user = User::find($userId);
+
+            $events = $user->events()
+                ->wherePivot('confirmed', false)
+                ->get();
+
+            return response()->json([
+                "message" => "Sucess",
+                "data" => $events
+            ], Response::HTTP_OK);
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                "message" => $th->getMessage(),
+                "data" => []
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
 }

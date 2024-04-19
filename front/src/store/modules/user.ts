@@ -4,6 +4,8 @@ const state = (): object => ({
     user: []
 })
 
+const USER_TOKEN = localStorage.getItem('token');
+
 // ACTIONS
 
 const actions = {
@@ -28,6 +30,19 @@ const actions = {
                 }
             }).then(r => r.data.data)
             localStorage.setItem("token", response.token)
+        } catch (error) {
+            console.log(error)
+            throw error
+        }
+    },
+    async confirmInvite({commit}, data) {
+        try {
+            await axios.post("http://localhost:8989/api/user/confirm/" + data, {}, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + USER_TOKEN
+                }
+            })
         } catch (error) {
             console.log(error)
             throw error
