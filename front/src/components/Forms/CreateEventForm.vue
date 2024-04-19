@@ -77,7 +77,7 @@ function handleCalendar(dateValue:DateValue){
         :="form.register('eventHour')"
         placeholder="Horário do evento"
         mask="99:99"
-        class="flex flex-row gap-2 p-2 placeholder:text-neutral-500 text-sm border border-neutral-300 rounded-sm"
+        class="flex flex-row gap-2 p-2 placeholder:text-neutral-500 text-sm border border-neutral-300 rounded-sm outline-none focus:border-primary"
       />
       <p class="text-red-600 font-medium text-sm">
         {{ form.formState.errors.eventHour?.message }}
