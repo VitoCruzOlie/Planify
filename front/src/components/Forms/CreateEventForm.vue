@@ -90,7 +90,7 @@ function handleCalendar(dateValue: DateValue) {
 <template>
   <form @submit.prevent="form.handleSubmit(onSubmit, onError)()" class="gap-8 flex flex-col px-10">
     <div class="gap-3 flex flex-col">
-      <Input :="form.register('eventName')" placeholder="Nome do evento" />
+      <Input :="form.register('eventName')" label="Nome do evento" />
       <p class="text-red-600 font-medium text-sm">
         {{ form.formState.errors.eventName?.message }}
       </p>
