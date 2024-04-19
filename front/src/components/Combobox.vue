@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch  } from 'vue'
 import { Check, ChevronsUpDown } from 'lucide-vue-next'
 
 import { cn } from '@/lib/utils'
@@ -18,16 +18,22 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 
-const participants = [
-  { value: 'Victor', label: 'vito@gmail.com' },
-  { value: 'Davi', label: 'davi@gmail.com' },
-  { value: 'João Sem Braço', label: 'jaosembraco@gmaol.com' },
-  { value: 'Maria Sem Perna', label: 'mariasemperna@gmail.com' },
-  { value: 'Roberto', label: 'roberto@gmail.com' },
-]
+const props = defineProps<{
+  participants: any;
+}>();
+
+const emit = defineEmits(['attValue'])
+
+console.log(props.participants)
+
+const participants = props.participants
 
 const open = ref(false)
 const value = ref('')
+
+watch(value, (newValue)=> {
+  emit('attValue', newValue)
+})
 </script>
 
 <template>
@@ -40,7 +46,7 @@ const value = ref('')
         class="w-[200px] justify-between"
       >
         {{ value
-          ? participants.find((participant) => participant.value === value)?.label
+          ? participants.find((participant) => participant.email === value)?.email
           : "Adicione um participante" }}
         <ChevronsUpDown class="ml-4 h-4 w-4 shrink-0 opacity-50" />
       </Button>
@@ -53,8 +59,8 @@ const value = ref('')
           <CommandGroup>
             <CommandItem
               v-for="participant in participants"
-              :key="participant.value"
-              :value="participant.value"
+              :key="participant.email"
+              :value="participant.email"
               @select="(ev) => {
                 if (typeof ev.detail.value === 'string') {
                   value = ev.detail.value
@@ -62,11 +68,11 @@ const value = ref('')
                 open = false
               }"
             >
-              {{ participant.label }}
+              {{ participant.email }}
               <Check
                 :class="cn(
                   'ml-auto h-4 w-4',
-                  value === participant.value ? 'opacity-100' : 'opacity-0',
+                  value === participant.email ? 'opacity-100' : 'opacity-0',
                 )"
               />
             </CommandItem>
