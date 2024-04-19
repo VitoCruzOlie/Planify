@@ -64,11 +64,11 @@ const onError = createErrorHandler((errors) => {
   <form @submit.prevent="form.handleSubmit(onSubmit, onError)()" class="gap-8 flex flex-col px-10">
     <div class="gap-3 flex flex-col">
 
-      <Input :="form.register('email')" label="Email" />
+      <Input input-id="email" :="form.register('email')" label="Email" />
       <p class="text-red-600 font-medium text-sm">
         {{ form.formState.errors.email?.message }}
       </p>
-      <Input :="form.register('password')" label="Senha" />
+      <Input input-id="password" :="form.register('password')" label="Senha" />
       <p class="text-red-600 font-medium text-sm">
         {{ form.formState.errors.password?.message }}
       </p>

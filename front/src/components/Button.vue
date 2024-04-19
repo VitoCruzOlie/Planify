@@ -3,7 +3,7 @@
 import { tv, type VariantProps } from "tailwind-variants";
 
 const button = tv({
-  base: "font-bold py-2 px-4 rounded-lg transition-all",
+  base: "font-bold py-2 px-4 rounded-lg transition-all hover:animate-pulse",
   variants: {
     variant: {
       primary: "bg-primary text-white hover:brightness-110",

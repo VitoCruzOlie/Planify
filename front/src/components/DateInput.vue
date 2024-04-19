@@ -3,7 +3,7 @@ import { Calendar as CalendarIcon } from 'lucide-vue-next'
 
 import { ref, watch } from 'vue'
 import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
+import { Button   } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
 import {
   Popover,
@@ -40,16 +40,11 @@ watch(value, (newValue) => {
 <template>
   <Popover>
     <PopoverTrigger as-child>
-      <Button
-        :variant="'outline'"
-        :class="cn(
-          'flex flex-row gap-2 p-2  placeholder:text-neutral-500 text-sm border border-neutral-300 rounded-sm justify-start focus:border-primary',
-          !value && 'text-muted-foreground',
-        )"
-      >
-        <CalendarIcon class=" h-4 w-4" />
-        <span>{{ value ? df.format(value.toDate(getLocalTimeZone())) : "Selecione uma data" }}</span>
-      </Button>
+      <button
+        class="flex flex-row gap-2 p-2  placeholder:text-neutral-500 text-sm border-b border-neutral-300 rounded-sm justify-start focus:border-primary">
+        <CalendarIcon class=" h-4 w-4 text-neutral-500" />
+        <span class="text-neutral-500" >{{ value ? df.format(value.toDate(getLocalTimeZone())) : "Selecione uma data" }}</span>
+      </button>
     </PopoverTrigger>
     <PopoverContent class="w-auto p-0">
       <Calendar v-model="value" />
