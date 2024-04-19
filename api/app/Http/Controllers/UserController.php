@@ -84,9 +84,22 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        try {
+            $user = $request->user();
+            $user->update($request->all());
+
+            return response()->json([
+                "message" => "Sucess",
+                "data" => $user
+            ], Response::HTTP_OK);
+        } catch (\Throwable $th) {
+            return response()->json([
+                "message" => $th->getMessage(),
+                "data" => []
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
@@ -113,7 +126,10 @@ class UserController extends Controller
                 "data" => []
             ], Response::HTTP_OK);
         } catch (\Throwable $th) {
-            //throw $th;
+            return response()->json([
+                "message" => $th->getMessage(),
+                "data" => []
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 

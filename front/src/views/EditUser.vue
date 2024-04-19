@@ -2,19 +2,37 @@
 import EditUserForm from '@/components/Forms/EditUserForm.vue';
 import { PhUserCircle } from '@phosphor-icons/vue';
 import NavBarBottom from '@/components/NavBarBottom.vue';
+
+import { useStore } from 'vuex'
+import { ref } from 'vue'
+
+const store = useStore()
+
+let user = ref()
+
+const loadData = async () => {
+  try {
+    const response = await store.dispatch('user/showUser')
+    user.value = response
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+loadData()
 </script>
 <template>
-    <nav class="bg-primary text-white flex justify-center items-center h-20">
+    <nav v-if="user" class="bg-primary text-white flex justify-center items-center h-20">
         <div class="flex flex-row gap-2 items-center">
             <PhUserCircle class="inline-block w-16 h-16"/>
-            <p class="font-semibold text-2xl">Davi Ribeiro Souza</p>
+            <p class="font-semibold text-2xl">{{user?.name}}</p>
         </div>
         
     </nav>
-    <main class="w-full min-h-svh">
+    <main v-if="user" class="w-full min-h-svh">
         <div class="p-10">
             <EditUserForm/>
         </div>
-        <NavBarBottom/>
     </main>
+    <NavBarBottom/>
 </template>

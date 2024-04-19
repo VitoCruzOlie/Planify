@@ -10,15 +10,14 @@ import {
 import { z } from "zod";
 import { useZodResolver } from "@vue-hooks-form/zod";
 import { useStore } from 'vuex'
-import { useRouter } from "vue-router";
+import Toast from 'primevue/toast';
 
-const emit = defineEmits(['alertError', 'alertSucess'])
+import { useToast } from 'primevue/usetoast';
 
 // STORE
 const store = useStore()
 
-// ROUTER
-const router = useRouter()
+const toast = useToast();
 
 // ZOD
 const schema = z.object({
@@ -52,21 +51,24 @@ const form = useForm<Schema>({
 
 const onSubmit = createSubmitHandler(async () => {
   try {
-    await store.dispatch('user/register', form.getValues())
-    emit('alertSucess')
+    await store.dispatch('user/updateUser', form.getValues())
+
+    toast.add({ severity: 'success', summary: 'Sucesso', detail: 'Usuário editado com sucesso', life: 3000 });
     setTimeout(() => {
-      router.push('/login')
-    }, 3000)
+      window.location.reload();
+    }, 3000);
   } catch (error) {
-    emit('alertError')
+    console.log(error)
+    toast.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao editar usuário', life: 3000 });
   }
 });
 const onError = createErrorHandler((errors) => {
-  emit('alertError')
+   toast.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao editar usuário', life: 3000 });
 });
 
 </script>
 <template>
+  <Toast class="w-3/4" />
   <form @submit.prevent="form.handleSubmit(onSubmit, onError)()" class="gap-8 flex flex-col px-10">
     <div class="gap-3 flex flex-col">
       <Input :="form.register('name')" label="Nome" />

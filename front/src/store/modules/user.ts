@@ -77,6 +77,34 @@ const actions = {
             console.log(error)
             throw error
         }
+    },
+    async updateUser(state, data) {
+        try {
+            const response = await axios.put("http://localhost:8989/api/user", data, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + USER_TOKEN
+                }
+            })
+            console.log(response)
+        } catch (error) {
+            console.log(error)
+            throw error
+        }
+    },
+    async showUser() {
+        try {
+            const response = await axios.get("http://localhost:8989/api/user", {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + USER_TOKEN
+                }
+            }).then(r => r.data.data)
+            return response
+        } catch (error) {
+            console.log(error)
+            throw error
+        }
     }
 }
 
@@ -84,7 +112,7 @@ const actions = {
 
 const mutations = {
     pushAllUsers(state: any, data: any) {
-        state.user = []
+        state.users = []
         data.forEach(e => {
             state.users.push(e)
         });
