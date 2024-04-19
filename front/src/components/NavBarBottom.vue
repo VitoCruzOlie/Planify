@@ -27,5 +27,8 @@ let actualRoute = router.currentRoute.value.path
 </template>
 
 <style scoped>
-
+nav {
+    border-top-right-radius: 2rem;
+    border-top-left-radius: 2rem;
+}
 </style>

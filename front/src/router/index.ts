@@ -41,7 +41,7 @@ const router = createRouter({
       component: EventDetails,
     },
     {
-      path: "/edit-user",
+      path: "/user",
       name: "edit-user",
       component: EditUser,
     },
