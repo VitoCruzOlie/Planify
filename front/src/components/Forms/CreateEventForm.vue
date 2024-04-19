@@ -100,13 +100,13 @@ function handleCalendar(dateValue: DateValue) {
         {{ form.formState.errors.eventDate?.message }}
       </p>
       <InputMask :="form.register('eventHour')" placeholder="Horário do evento" mask="99:99"
-        class="flex flex-row gap-2 p-2 placeholder:text-neutral-500 text-sm border border-neutral-300 rounded-sm" />
+        class="flex flex-row gap-2 p-2 placeholder:text-neutral-500 text-sm border border-neutral-300 rounded-sm outline-none focus:border-primary" />
       <p class="text-red-600 font-medium text-sm">
         {{ form.formState.errors.eventHour?.message }}
       </p>
-      <Input :="form.register('eventSubject')" placeholder="Assunto" />
+      <Input :="form.register('eventSubject')" label="Assunto" />
 
-      <TextAreaInput :="form.register('eventDescription')" placeholder="Descrição" />
+      <TextAreaInput :="form.register('eventDescription')" label="Descrição" />
     </div>
     <Button class="text-2xl" label="CRIAR EVENTO" :variant="{ variant: 'primary' }" />
   </form>
