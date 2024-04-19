@@ -11,6 +11,7 @@ import Skeleton from 'primevue/skeleton';
 
 import { ref } from 'vue';
 import { useStore } from 'vuex'
+import { useRouter } from "vue-router";
 
 import Toast from 'primevue/toast';
 import { useToast } from 'primevue/usetoast';
@@ -18,6 +19,7 @@ import { useToast } from 'primevue/usetoast';
 const toast = useToast();
 
 const store = useStore();
+const router = useRouter();
 
 let events = ref([])
 let invites = ref([])
@@ -56,15 +58,19 @@ loadData()
 const confirmInvite = async (event) => {
   try {
     await store.dispatch('user/confirmInvite', event)
-    toast.add({ severity: 'success', summary: 'Sucesso', detail: 'Evento confirmado!', life: 3000 });
+    toast.add({ severity: 'success', summary: 'Sucesso', detail: 'Evento confirmado!', life: 3000 })
     setTimeout(() => {
       window.location.reload();
     }, 3000)
     
   } catch (error) {
     console.log(error)
-    toast.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao confirmar evento', life: 3000 });
+    toast.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao confirmar evento', life: 3000 })
   }
+}
+
+const redirect = (id) => {
+    router.push('/event-details/' + id)
 }
 
 </script>
@@ -77,7 +83,7 @@ const confirmInvite = async (event) => {
     <CarouselContent class="pl-2">
       <Skeleton v-if="showSkeleton" class="p-4 ml-4" width="50%" height="8rem" borderRadius="16px"></Skeleton>
       <Skeleton v-if="showSkeleton" class="p-4 ml-4" width="50%" height="8rem" borderRadius="16px"></Skeleton>
-      <CarouselItem v-for="(event, index) in events" :key="index" class="basis-1/1">
+      <CarouselItem v-for="(event, index) in events" :key="index" class="basis-1/1" @click="redirect(event.id)">
 
         <EventCard :imageUrl="images">
           <template #title>

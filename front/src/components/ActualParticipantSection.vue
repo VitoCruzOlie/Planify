@@ -2,6 +2,7 @@
 import ParticipantCard from "./ParticipantCard.vue";
 const props = defineProps<{
   title: string;
+  participants: any;
 }>();
 </script>
 
@@ -13,7 +14,7 @@ const props = defineProps<{
       <p class="absolute top-0 left-0 ml-3 text-2xl font-bold">{{ props.title }}</p>
     </div>
     <div class="w-full flex flex-col gap-2">
-      <ParticipantCard image="/cardimage.svg" v-for="index in 3" name="João Sem Braço" />
+      <ParticipantCard image="/cardimage.svg" v-for="participant in props.participants" :name="participant.name" />
     </div>
   </div>
 </template>

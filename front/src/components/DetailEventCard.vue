@@ -5,6 +5,8 @@ const props = defineProps<{
   title: string;
   date: string;
   hour: string;
+  img: string
+  weekDay: string
 }>();
 </script>
 <template>
@@ -17,7 +19,7 @@ const props = defineProps<{
       >
         <img
           class="group-hover:scale-105 transition-all object-cover w-full h-full"
-          src="/cardimage.svg"
+          :src="props.img"
         />
       </div>
       <div class="w-full line-clamp-1 flex flex-col pt-2">
@@ -30,7 +32,7 @@ const props = defineProps<{
         <div class="flex flex-row gap-0.5 items-center">
           <PhTimer class="text-gray-500 text-lg"/>
           <span class="text-gray-500 font-light text-sm line-clamp-1"
-            >Quinta às {{ hour }}</span
+            >{{ weekDay }} às {{ hour }}</span
           >
         </div>
       </div>
