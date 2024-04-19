@@ -17,6 +17,7 @@ Route::group(["prefix" => "/user"], function () {
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('/', [UserController::class, 'show'])->name('show');
         Route::get('/events', [UserController::class, 'events'])->name('userEvents');
+        Route::get('/events/invites', [UserController::class, 'eventsInvites'])->name('userEvents');
         Route::post('/confirm/{id}', [UserController::class, 'confirmParticipation'])->name('confirmParticipation'); 
     });
 });
