@@ -9,7 +9,7 @@ type Props = {
   <div class="h-fit w-full relative">
     <textarea
       id="input"
-      class="flex flex-row gap-2 placeholder:text-neutral-500 border peer border-neutral-300 rounded-lg w-full focus:border-neutral-300 outline-none py-2.5 px-2"
+      class="flex flex-row gap-2 placeholder:text-neutral-500 border peer border-neutral-300 rounded-lg w-full focus:border-primary outline-none py-2.5 px-2"
       type="text"
     />
 
