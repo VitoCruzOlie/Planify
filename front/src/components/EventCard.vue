@@ -16,7 +16,7 @@ const props = defineProps({
       <div class="w-full line-clamp-1 flex flex-col pt-2">
         <slot name="date"></slot>
         <slot name="title"></slot>
-        <slot name="description"> </slot>
+        <slot class="line-clamp-1" name="description"> </slot>
       </div>
     </div>
   </div>

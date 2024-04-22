@@ -6,8 +6,10 @@ import Skeleton from 'primevue/skeleton';
 
 import { ref } from 'vue';
 import { useStore } from 'vuex'
+import { useRouter } from "vue-router";
 
 const store = useStore();
+const router = useRouter();
 
 let attrs = ref([
     {
@@ -49,10 +51,14 @@ async function load() {
         showSkeleton.value = false
     } catch (error) {
         console.log(error)
-    }
+    }   
 }
 
 load()
+
+const redirect = (id) => {
+    router.push('/event-details/' + id)
+}
 
 </script>
 
@@ -63,7 +69,7 @@ load()
     <main class="p-4 flex justify-center flex-col mb-20">
         <VCalendar expanded color="blue" :attributes="attrs" />
         <section>
-            <CardUserEvent v-for="(event, index) in events" :key="index">
+            <CardUserEvent v-for="(event, index) in events" :key="index" @click="redirect(event.id)">
                 <template v-slot:tittle>
                     <h1 class="text-black font-bold text-lg max-w-64 break-words">{{ event.name }}</h1>
                 </template>

@@ -41,14 +41,13 @@ const actions = {
     },
     async createEvent({ commit }, data) {
         try {
-            console.log(data)
             const response = await axios.post("http://localhost:8989/api/event", data, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + USER_TOKEN
                 }
-            }).then(r => r)
-            console.log(response)
+            }).then(r => r.data.data)
+            return response
         } catch (error) {
             console.log(error)
             throw error
@@ -63,6 +62,20 @@ const actions = {
                 }
             }).then(r => r.data.data)
             commit('pushInvites', response)
+        } catch (error) {
+            console.log(error)
+            throw error
+        }
+    },
+    async showEvent(state, data) {
+        try {
+            const response = await axios.get('http://localhost:8989/api/event/' + data, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + USER_TOKEN
+                }
+            }).then(r => r.data.data)
+            return response
         } catch (error) {
             console.log(error)
             throw error

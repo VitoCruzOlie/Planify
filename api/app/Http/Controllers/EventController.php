@@ -62,11 +62,23 @@ class EventController extends Controller
     public function show(Request $request)
     {
         try {
-            $event = $this->repository->with('users')->findOrFail($request->id);
+            $event = $this->repository->findOrFail($request->id);
+
+            $usersConfirmed = $event->users()
+                ->wherePivot('confirmed', true)
+                ->get();
+
+            $userInvited = $event->users()
+                ->wherePivot('confirmed', false)
+                ->get();
 
             return response()->json([
                 "message" => "Sucess",
-                "data" => $event
+                "data" => [
+                    "events" => $event,
+                    "users" =>
+                        ["users_confirmed" => $usersConfirmed, "users_invited" => $userInvited]
+                ]
             ], Response::HTTP_OK);
         } catch (\Throwable $th) {
             return response()->json([
@@ -129,7 +141,7 @@ class EventController extends Controller
 
             $event = $this->repository->findOrFail($eventId);
 
-            $event->users()->attach($user);
+            $event->users()->attach($user, ['confirmed' => false]);
 
             return response()->json([
                 "message" => "Invite submit with sucess",
