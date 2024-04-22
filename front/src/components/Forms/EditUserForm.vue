@@ -9,37 +9,42 @@ import {
 } from "@vue-hooks-form/core";
 import { z } from "zod";
 import { useZodResolver } from "@vue-hooks-form/zod";
-import { useStore } from 'vuex'
-import Toast from 'primevue/toast';
+import { useStore } from "vuex";
+import Toast from "primevue/toast";
 
-import { useToast } from 'primevue/usetoast';
+import { useToast } from "primevue/usetoast";
 
 // STORE
-const store = useStore()
+const store = useStore();
 
 const toast = useToast();
 
 // ZOD
-const schema = z.object({
-  name: z.string().min(3, {
-    message: "O nome deve possúir mais que três caracteres!",
-  }),
-  email: z.string().min(1, {
-    message: "Por favor, preencha o campo de email!",
-  }).email({
-    message: "O email informado não é válido",
-  }),
+const schema = z
+  .object({
+    name: z.string().min(3, {
+      message: "O nome deve possúir mais que três caracteres!",
+    }),
+    email: z
+      .string()
+      .min(1, {
+        message: "Por favor, preencha o campo de email!",
+      })
+      .email({
+        message: "O email informado não é válido",
+      }),
 
-  password: z.string().min(8, {
-    message: "A senha não pode possuir menos que 8 caracteres!",
-  }),
-  confirmPassword: z.string().min(8, {
-    message: "A senha não pode possuir menos que 8 caracteres!",
+    password: z.string().min(8, {
+      message: "A senha não pode possuir menos que 8 caracteres!",
+    }),
+    confirmPassword: z.string().min(8, {
+      message: "A senha não pode possuir menos que 8 caracteres!",
+    }),
   })
-}).refine(data => data.password === data.confirmPassword, {
-  message: "As senhas digitadas não coincidem!",
-  path: ["confirmPassword"],
-});
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "As senhas digitadas não coincidem!",
+    path: ["confirmPassword"],
+  });
 
 type Schema = z.infer<typeof schema>;
 
@@ -51,43 +56,86 @@ const form = useForm<Schema>({
 
 const onSubmit = createSubmitHandler(async () => {
   try {
-    await store.dispatch('user/updateUser', form.getValues())
+    await store.dispatch("user/updateUser", form.getValues());
 
-    toast.add({ severity: 'success', summary: 'Sucesso', detail: 'Usuário editado com sucesso', life: 3000 });
+    toast.add({
+      severity: "success",
+      summary: "Sucesso",
+      detail: "Usuário editado com sucesso",
+      life: 3000,
+    });
     setTimeout(() => {
       window.location.reload();
     }, 3000);
   } catch (error) {
-    console.log(error)
-    toast.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao editar usuário', life: 3000 });
+    console.log(error);
+    toast.add({
+      severity: "error",
+      summary: "Erro",
+      detail: "Erro ao editar usuário",
+      life: 3000,
+    });
   }
 });
 const onError = createErrorHandler((errors) => {
-   toast.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao editar usuário', life: 3000 });
+  toast.add({
+    severity: "error",
+    summary: "Erro",
+    detail: "Erro ao editar usuário",
+    life: 3000,
+  });
 });
-
 </script>
 <template>
   <Toast class="w-3/4" />
-  <form @submit.prevent="form.handleSubmit(onSubmit, onError)()" class="gap-8 flex flex-col px-10">
+  <form
+    @submit.prevent="form.handleSubmit(onSubmit, onError)()"
+    class="gap-8 flex flex-col px-10 md:px-60"
+  >
     <div class="gap-3 flex flex-col">
-      <Input :="form.register('name')" label="Nome" type="text" input-id="name" />
+      <Input
+        :="form.register('name')"
+        label="Nome"
+        type="text"
+        input-id="name"
+      />
       <p class="text-red-600 font-medium text-sm">
         {{ form.formState.errors.name?.message }}
       </p>
-      <Input :="form.register('email')" label="Email" type="text" input-id="email" />
+      <Input
+        :="form.register('email')"
+        label="Email"
+        type="text"
+        input-id="email"
+      />
       <p class="text-red-600 font-medium text-sm">
         {{ form.formState.errors.email?.message }}
       </p>
-      <Input :="form.register('password')" label="Senha" type="password" input-id="password" />
+      <Input
+        :="form.register('password')"
+        label="Senha"
+        type="password"
+        input-id="password"
+      />
       <p class="text-red-600 font-medium text-sm">
         {{ form.formState.errors.password?.message }}
       </p>
-      <Input :="form.register('confirmPassword')" label="Confirme a senha" type="password" input-id="confirmPassword" />
+      <Input
+        :="form.register('confirmPassword')"
+        label="Confirme a senha"
+        type="password"
+        input-id="confirmPassword"
+      />
       <p class="text-red-600 font-medium text-sm">
         {{ form.formState.errors.confirmPassword?.message }}
       </p>
     </div>
-    <Button class="text-xl" label="SALVAR" :variant="{ variant: 'primary' }" />
+    <div class="w-full items-center justify-center flex  ">
+      <Button
+        class="text-xl md:w-1/2 md:text-2xl"
+        label="SALVAR"
+        :variant="{ variant: 'primary' }"
+      />
+    </div>
   </form>
 </template>
