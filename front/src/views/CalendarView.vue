@@ -51,7 +51,7 @@ async function load() {
         showSkeleton.value = false
     } catch (error) {
         console.log(error)
-    }
+    }   
 }
 
 load()
