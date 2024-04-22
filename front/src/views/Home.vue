@@ -4,7 +4,6 @@ import SearchBar from "../components/SearchBar.vue";
 import CTA from "../components/CTA.vue";
 import HomeCarousel from "../components/HomeCarousel.vue";
 import NavBarBottom from "../components/NavBarBottom.vue";
-import EventCard from "../components/EventCard.vue";
 
 
 const isLogin = () => {

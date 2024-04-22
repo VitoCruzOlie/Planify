@@ -69,19 +69,19 @@ const onError = createErrorHandler((errors) => {
 <template>
   <form @submit.prevent="form.handleSubmit(onSubmit, onError)()" class="gap-8 flex flex-col px-10">
     <div class="gap-3 flex flex-col">
-      <Input :="form.register('name')" label="Nome" input-id="name" />
+      <Input :="form.register('name')" label="Nome" type="text" input-id="name" />
       <p class="text-red-600 font-medium text-sm">
         {{ form.formState.errors.name?.message }}
       </p>
-      <Input :="form.register('email')" label="Email" input-id="email" />
+      <Input :="form.register('email')" label="Email" type="text" input-id="email" />
       <p class="text-red-600 font-medium text-sm">
         {{ form.formState.errors.email?.message }}
       </p>
-      <Input :="form.register('password')" label="Senha" input-id="password" />
+      <Input :="form.register('password')" type="password" label="Senha" input-id="password" />
       <p class="text-red-600 font-medium text-sm">
         {{ form.formState.errors.password?.message }}
       </p>
-      <Input :="form.register('confirmPassword')" label="Confirme a senha" input-id="confirmPassword" />
+      <Input :="form.register('confirmPassword')" type="password" label="Confirme a senha" input-id="confirmPassword" />
       <p class="text-red-600 font-medium text-sm">
         {{ form.formState.errors.confirmPassword?.message }}
       </p>

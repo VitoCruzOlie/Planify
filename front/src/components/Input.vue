@@ -4,6 +4,7 @@ import { defineProps } from "vue";
 type Props = {
   label: string;
   inputId: string;
+  type:string;
 };
 
 const props = defineProps<Props>();
@@ -13,7 +14,7 @@ const props = defineProps<Props>();
   <div class="h-fit w-full relative">
     <input
       :id="props.inputId"
-      type="text"
+      :type="props.type"
       class="peer h-10 w-full border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:outline-none focus:border-primary"
       placeholder="...."
     />
