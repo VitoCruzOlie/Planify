@@ -9,6 +9,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Resources\EventResource;
+use Resend\Laravel\Facades\Resend;
+use Illuminate\Support\Facades\View;
 
 class EventController extends Controller
 {
@@ -142,6 +144,17 @@ class EventController extends Controller
             $event = $this->repository->findOrFail($eventId);
 
             $event->users()->attach($user, ['confirmed' => false]);
+
+            Resend::emails()->send([
+                'from' => 'Planify <onboarding@resend.dev>',
+                'to' => $user->email,
+                'subject' => 'Convite para evento',
+                'html' => View::make('emails.invite_email', with([
+                    'email' => $user->email,
+                    'event' => $event,
+                    'from' => $request->user()->email
+                ]))->render()
+            ]);
 
             return response()->json([
                 "message" => "Invite submit with sucess",

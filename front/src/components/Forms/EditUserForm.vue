@@ -14,8 +14,13 @@ import Toast from 'primevue/toast';
 
 import { useToast } from 'primevue/usetoast';
 
+import { useRouter } from "vue-router";
+
 // STORE
 const store = useStore()
+
+// ROUTER
+const router = useRouter()
 
 const toast = useToast();
 
@@ -63,8 +68,16 @@ const onSubmit = createSubmitHandler(async () => {
   }
 });
 const onError = createErrorHandler((errors) => {
-   toast.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao editar usuário', life: 3000 });
+  toast.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao editar usuário', life: 3000 });
 });
+
+const logout = () => {
+  localStorage.removeItem('token')
+  toast.add({ severity: 'success', summary: 'Sucesso', detail: 'Usuário desconectado', life: 3000 });
+  setTimeout(() => {
+      router.push('/')
+    }, 3000);
+}
 
 </script>
 <template>
@@ -90,4 +103,7 @@ const onError = createErrorHandler((errors) => {
     </div>
     <Button class="text-xl" label="SALVAR" :variant="{ variant: 'primary' }" />
   </form>
+  <div class="gap-8 flex flex-col px-10 mt-6">
+    <Button @click="logout" class="" label="SAIR" :variant="{ variant: 'outline_secondary' }" />
+  </div>
 </template>
