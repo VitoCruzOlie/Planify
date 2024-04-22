@@ -18,7 +18,7 @@ let actualRoute = router.currentRoute.value.path
             <PhCalendar :size="40" :color="actualRoute === '/calendar' ? '#000000' : '#F7F9FB'" />
         </router-link>
         <router-link to="/edit-user">
-            <PhUserCircle :size="40" :color="actualRoute === '/user' ? '#000000' : '#F7F9FB'" />
+            <PhUserCircle :size="40" :color="actualRoute === '/edit-user' ? '#000000' : '#F7F9FB'" />
         </router-link>
         <router-link to="/create-event">
             <PhCalendarPlus :size="40" :color="actualRoute === '/create-event' ? '#000000' : '#F7F9FB'" />
