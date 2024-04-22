@@ -11,6 +11,17 @@ import { useRouter } from "vue-router";
 const store = useStore();
 const router = useRouter();
 
+import { onMounted } from 'vue'
+
+import { gsap } from "gsap";
+
+onMounted(() => {
+  let timeline = gsap.timeline();
+  timeline.to('.box', {x: "-100vh", duration: 0})
+  timeline.to('.box', {x: "0vh", duration: 0.5})
+})
+
+
 let attrs = ref([
     {
         highlight: true,
@@ -66,7 +77,7 @@ const redirect = (id) => {
     <nav class="w-full flex flex-row justify-between p-4 items-center">
         <h1 class="text-primary text-xl font-bold">Planify</h1>
     </nav>
-    <main class="p-4 flex justify-center flex-col mb-20">
+    <main class="box p-4 flex justify-center flex-col mb-20">
         <VCalendar expanded color="blue" :attributes="attrs" />
         <section>
             <CardUserEvent v-for="(event, index) in events" :key="index" @click="redirect(event.id)">
