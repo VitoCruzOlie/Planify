@@ -109,7 +109,7 @@ const redirect = (id) => {
       <Skeleton v-if="showSkeletonInvite" class="p-4 ml-4" width="50%" height="8rem" borderRadius="16px"></Skeleton>
       <Skeleton v-if="showSkeletonInvite" class="p-4 ml-4" width="50%" height="8rem" borderRadius="16px"></Skeleton>
 
-      <CarouselItem v-for="(event, index) in invites" :key="index" class="basis-1/1">
+      <CarouselItem v-for="(event, index) in invites" :key="index" class="sm:basis-1/2">
 
         <InviteEventCard @confirmInvite="confirmInvite(event.id)" :imageUrl="images">
           <template #title>
