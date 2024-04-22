@@ -5,13 +5,15 @@ import CTA from "../components/CTA.vue";
 import HomeCarousel from "../components/HomeCarousel.vue";
 import NavBarBottom from "../components/NavBarBottom.vue";
 
+import {useStore} from 'vuex'
+
+
 
 const isLogin = () => {
   if (localStorage.getItem("token")) return true
   return false
 }
 
-// store.dispatch('event/getAllEvents')
 </script>
 <template>
   <nav v-if="!isLogin()" class="w-full bg-primary justify-center items-center flex flex-col py-4 px-2 gap-2">
