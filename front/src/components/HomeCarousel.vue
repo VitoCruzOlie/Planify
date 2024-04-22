@@ -84,7 +84,7 @@ const confirmInvite = async (event) => {
             <span class="text-black font-bold text-lg">{{ event.name }}</span>
           </template>
           <template #description>
-            <span class="text-gray-500 font-light text-xs">{{ event.description }}</span>
+            <span class="text-gray-500 font-light text-xs line-clamp-1">{{ event.description }}</span>
           </template>
           <template #date>
             <span class="text-primary font-bold text-xs">{{ event.date }}</span>
