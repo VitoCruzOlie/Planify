@@ -8,7 +8,18 @@ import { ref } from 'vue'
 
 const store = useStore()
 
+import { onMounted } from 'vue'
+
+import { gsap } from "gsap";
+
+onMounted(() => {
+  let timeline = gsap.timeline();
+  timeline.to('.box', {x: "-100vh", duration: 0})
+  timeline.to('.box', {x: "0vh", duration: 0.5})
+})
+
 let user = ref()
+
 
 const loadData = async () => {
   try {
@@ -22,14 +33,14 @@ const loadData = async () => {
 loadData()
 </script>
 <template>
-    <nav v-if="user" class="bg-primary text-white flex justify-center items-center h-20">
+    <nav  class="bg-primary text-white flex justify-center items-center h-20">
         <div class="flex flex-row gap-2 items-center">
             <PhUserCircle class="inline-block w-16 h-16"/>
             <p class="font-semibold text-2xl">{{user?.name}}</p>
         </div>
         
     </nav>
-    <main v-if="user" class="w-full min-h-svh">
+    <main  class="box w-full min-h-svh">
         <div class="p-10">
             <EditUserForm/>
         </div>
