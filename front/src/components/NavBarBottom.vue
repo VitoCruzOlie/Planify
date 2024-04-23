@@ -10,7 +10,7 @@ let actualRoute = router.currentRoute.value.path
 </script>
 
 <template>
-    <nav  class="bg-primary max-w-full md:max-w-md rounded-t-lg flex z-10 items-center w-full h-20 border-0 place-content-around fixed bottom-0 left-1/2 -translate-x-1/2">
+    <nav  class="bg-primary max-w-full md:max-w-md md:hidden rounded-t-lg flex z-10 items-center w-full h-20 border-0 place-content-around fixed bottom-0 left-1/2 -translate-x-1/2">
         <router-link to="/">
             <PhHouse :size="40" :color="actualRoute === '/' ? '#000000' : '#F7F9FB'" />
         </router-link>

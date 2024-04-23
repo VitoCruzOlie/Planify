@@ -30,9 +30,11 @@ const showAlertSucess = () => {
     <nav
       class="w-full flex flex-row justify-between p-2 items-center border border-b-neutral-300"
     >
-      <h1 class="text-primary text-xl font-bold">Planify</h1>
+      <router-link to="/">
+        <h1 class="text-primary text-xl font-bold">Planify</h1>
+      </router-link>
     </nav>
-    <main class="w-full  max-w-7xl min-h-svh bg-white mb-20 flex flex-col">
+    <main class="w-full max-w-7xl min-h-svh bg-white mb-20 flex flex-col">
       <Toast class="w-3/4" />
       <div class="w-full flex flex-col gap-7">
         <div

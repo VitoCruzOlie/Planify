@@ -62,17 +62,17 @@ const redirect = (id) => {
 </script>
 
 <template>
-  <div class="w-full  items-center justify-center flex flex-col">
+  <div class="w-full items-center justify-center flex flex-col">
     <nav class="w-full flex flex-row justify-between p-4 items-center">
-      <h1 class="text-primary text-xl font-bold">Planify</h1>
+      <router-link to="/">
+        <h1 class="text-primary text-xl font-bold">Planify</h1>
+      </router-link>
     </nav>
-    <main
-      class="p-4 flex justify-center flex-col mb-20 w-full max-w-7xl"
-    >
+    <main class="p-4 flex justify-center flex-col mb-20 w-full max-w-7xl">
       <VCalendar expanded color="blue" :attributes="attrs" />
       <section class="w-full items-center justify-center flex flex-col">
         <CardUserEvent
-            class="w-full md:w-4/5"
+          class="w-full md:w-4/5"
           v-for="(event, index) in events"
           :key="index"
           @click="redirect(event.id)"
