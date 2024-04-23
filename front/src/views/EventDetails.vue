@@ -20,7 +20,7 @@ const df = new DateFormatter("pt-BR");
 
 let event = ref();
 let users = ref([]);
-let images = ref("https://picsum.photos/400/200");
+let images = ref("https://picsum.photos/1600/500");
 let weekDay = ref();
 let showSkeleton = ref(false);
 
