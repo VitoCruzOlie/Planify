@@ -33,17 +33,21 @@ const loadData = async () => {
 loadData()
 </script>
 <template>
-    <nav  class="bg-primary text-white flex justify-center items-center h-20">
+  <div class="w-full flex flex-col justify-center items-center">
+
+    <nav v-if="user" class="bg-primary text-white flex justify-start pl-3 items-center h-20 w-full">
         <div class="flex flex-row gap-2 items-center">
             <PhUserCircle class="inline-block w-16 h-16"/>
             <p class="font-semibold text-2xl">{{user?.name}}</p>
         </div>
         
     </nav>
-    <main  class="box w-full min-h-svh">
+    <main v-if="user" class="w-full max-w-7xl min-h-svh">
         <div class="p-10">
             <EditUserForm/>
         </div>
     </main>
+  </div>
+
     <NavBarBottom/>
 </template>

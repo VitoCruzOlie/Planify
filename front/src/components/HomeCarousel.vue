@@ -95,7 +95,7 @@ const redirect = (id) => {
             <span class="text-black font-bold text-lg">{{ event.name }}</span>
           </template>
           <template #description>
-            <span class="text-gray-500 font-light text-xs">{{ event.description }}</span>
+            <span class="text-gray-500 font-light text-xs line-clamp-1">{{ event.description }}</span>
           </template>
           <template #date>
             <span class="text-primary font-bold text-xs">{{ event.date }}</span>
@@ -114,7 +114,7 @@ const redirect = (id) => {
       <Skeleton v-if="showSkeletonInvite" class="p-4 ml-4" width="50%" height="8rem" borderRadius="16px"></Skeleton>
       <Skeleton v-if="showSkeletonInvite" class="p-4 ml-4" width="50%" height="8rem" borderRadius="16px"></Skeleton>
 
-      <CarouselItem v-for="(event, index) in invites" :key="index" class="basis-1/1">
+      <CarouselItem v-for="(event, index) in invites" :key="index" class="sm:basis-1/2">
 
         <InviteEventCard @confirmInvite="confirmInvite(event.id)" :imageUrl="images">
           <template #title>
