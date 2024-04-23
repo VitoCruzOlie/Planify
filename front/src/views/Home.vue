@@ -1,4 +1,6 @@
 <script setup lang="ts">
+
+//Component imports
 import Button from "../components/Button.vue";
 import SearchBar from "../components/SearchBar.vue";
 import CTA from "../components/CTA.vue";
@@ -16,6 +18,7 @@ onMounted(() => {
   timeline.to('.box', { x: "0vh", duration: 0.5 })
 })
 
+gsap.to('.main', {})
 
 let searchValue = ref()
 
@@ -40,7 +43,7 @@ const onSearch = (inputValue) => {
         <Button :variant="{ variant: 'outline' }" label="CRIE SEU EVENTO" />
       </div>
     </nav>
-    <main class="w-full max-w-7xl min-h-svh">
+    <main class="w-full max-w-7xl min-h-svh" ref="scroll">
       <div class="flex flex-row p-4 justify-between">
         <h1 class="text-primary text-xl font-bold">Planify</h1>
         <div class="  flex-row gap-2 hidden md:flex">
