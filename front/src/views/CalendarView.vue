@@ -11,6 +11,17 @@ import { useRouter } from "vue-router";
 const store = useStore();
 const router = useRouter();
 
+import { onMounted } from 'vue'
+
+import { gsap } from "gsap";
+
+onMounted(() => {
+  let timeline = gsap.timeline();
+  timeline.to('.box', {x: "-100vh", duration: 0})
+  timeline.to('.box', {x: "0vh", duration: 0.5})
+})
+
+
 let attrs = ref([
   {
     highlight: true,

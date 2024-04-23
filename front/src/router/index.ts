@@ -6,6 +6,7 @@ import Login from "../views/Login.vue";
 import CreateEvent from "@/views/CreateEvent.vue";
 import EventDetails from "@/views/EventDetails.vue";
 import EditUser from "@/views/EditUser.vue";
+import ConfirmInvite from "@/views/ConfirmInvite.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,6 +45,11 @@ const router = createRouter({
       path: "/edit-user",
       name: "edit-user",
       component: EditUser,
+    },
+    {
+      path: "/confirm-invite/:id",
+      name: "confirm-invite",
+      component: ConfirmInvite,
     },
   ],
 });

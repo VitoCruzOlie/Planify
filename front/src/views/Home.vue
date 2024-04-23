@@ -5,6 +5,20 @@ import CTA from "../components/CTA.vue";
 import HomeCarousel from "../components/HomeCarousel.vue";
 import NavBarBottom from "../components/NavBarBottom.vue";
 
+import { useStore } from 'vuex'
+
+import { onMounted } from 'vue'
+
+import { gsap } from "gsap";
+
+onMounted(() => {
+  let timeline = gsap.timeline();
+  timeline.to('.box', { x: "-100vh", duration: 0 })
+  timeline.to('.box', { x: "0vh", duration: 0.5 })
+})
+
+
+
 const isLogin = () => {
   if (localStorage.getItem("token")) return true;
   return false;

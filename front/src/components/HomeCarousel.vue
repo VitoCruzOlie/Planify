@@ -27,6 +27,7 @@ let images = ref('https://picsum.photos/400/200')
 let showInvites = ref(false)
 let showSkeleton = ref(false)
 let showSkeletonInvite = ref(false)
+let showWithoutEvents = ref(false)
 
 const loadData = async () => {
   try {
@@ -48,6 +49,10 @@ const loadData = async () => {
 
     showSkeletonInvite.value = false
     invites.value.length > 0 ? showInvites.value = true : showInvites.value = false
+
+    if (!(events.value.length > 0) && !(invites.value.length > 0)) {
+      showWithoutEvents.value = true
+    }
   } catch (error) {
     console.log(error)
   }
@@ -62,7 +67,7 @@ const confirmInvite = async (event) => {
     setTimeout(() => {
       window.location.reload();
     }, 3000)
-    
+
   } catch (error) {
     console.log(error)
     toast.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao confirmar evento', life: 3000 })
@@ -70,7 +75,7 @@ const confirmInvite = async (event) => {
 }
 
 const redirect = (id) => {
-    router.push('/event-details/' + id)
+  router.push('/event-details/' + id)
 }
 
 </script>
@@ -78,7 +83,7 @@ const redirect = (id) => {
 <template>
 
   <Toast class="w-3/4" />
-
+  <h1 v-if="showWithoutEvents" class="p-4">Nenhum evento disponível...</h1>
   <Carousel>
     <CarouselContent class="pl-2">
       <Skeleton v-if="showSkeleton" class="p-4 ml-4" width="50%" height="8rem" borderRadius="16px"></Skeleton>

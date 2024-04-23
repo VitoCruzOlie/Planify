@@ -8,7 +8,18 @@ import { ref } from 'vue'
 
 const store = useStore()
 
+import { onMounted } from 'vue'
+
+import { gsap } from "gsap";
+
+onMounted(() => {
+  let timeline = gsap.timeline();
+  timeline.to('.box', {x: "-100vh", duration: 0})
+  timeline.to('.box', {x: "0vh", duration: 0.5})
+})
+
 let user = ref()
+
 
 const loadData = async () => {
   try {

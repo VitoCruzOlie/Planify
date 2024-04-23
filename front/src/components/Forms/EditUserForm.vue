@@ -12,10 +12,12 @@ import { useZodResolver } from "@vue-hooks-form/zod";
 import { useStore } from "vuex";
 import Toast from "primevue/toast";
 
-import { useToast } from "primevue/usetoast";
+import { useToast } from 'primevue/usetoast';
+
+import { useRouter } from "vue-router";
 
 // STORE
-const store = useStore();
+const store = useStore()
 
 const toast = useToast();
 
@@ -85,6 +87,14 @@ const onError = createErrorHandler((errors) => {
     life: 3000,
   });
 });
+
+const logout = () => {
+  localStorage.removeItem('token')
+  toast.add({ severity: 'success', summary: 'Sucesso', detail: 'Usuário desconectado', life: 3000 });
+  setTimeout(() => {
+      router.push('/')
+    }, 3000);
+}
 </script>
 <template>
   <Toast class="w-3/4" />
@@ -138,4 +148,7 @@ const onError = createErrorHandler((errors) => {
       />
     </div>
   </form>
+  <div class="gap-8 flex flex-col px-10 mt-6">
+    <Button @click="logout" class="" label="SAIR" :variant="{ variant: 'outline_secondary' }" />
+  </div>
 </template>

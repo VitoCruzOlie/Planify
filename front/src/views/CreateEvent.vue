@@ -8,6 +8,16 @@ import { useToast } from "primevue/usetoast";
 
 const toast = useToast();
 
+import { onMounted } from 'vue'
+
+import { gsap } from "gsap";
+
+onMounted(() => {
+  let timeline = gsap.timeline();
+  timeline.to('.box', {x: "-100vh", duration: 0})
+  timeline.to('.box', {x: "0vh", duration: 0.5})
+})
+
 const showAlertError = () => {
   toast.add({
     severity: "error",
