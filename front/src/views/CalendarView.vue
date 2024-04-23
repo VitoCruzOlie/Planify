@@ -15,6 +15,8 @@ import { onMounted } from 'vue'
 
 import { gsap } from "gsap";
 
+
+// Animation
 onMounted(() => {
   let timeline = gsap.timeline();
   timeline.to('.box', {x: "-100vh", duration: 0})
@@ -22,15 +24,14 @@ onMounted(() => {
 })
 
 
+// Atributes for v-calendar
 let attrs = ref([
   {
     highlight: true,
     dates: [new Date()],
   },
 ]);
-
 let events = ref([]);
-
 let showSkeleton = ref(false);
 
 async function load() {
@@ -41,7 +42,7 @@ async function load() {
     if (store.getters["event/userEvents"]) {
       store.getters["event/userEvents"].forEach((e) => {
         let date = e.date;
-        const [year, month, day] = date.split("-");
+        const [year, month, day] = date.split("-")
 
         attrs.value.push({
           dot: true,
@@ -55,21 +56,22 @@ async function load() {
         });
 
         events.value.push(e);
-        showSkeleton.value = false;
-        return;
-      });
+        showSkeleton.value = false
+        return
+      })
     }
-    showSkeleton.value = false;
+    showSkeleton.value = false
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
 }
 
-load();
+load()
 
 const redirect = (id) => {
   router.push("/event-details/" + id);
-};
+}
+
 </script>
 
 <template>

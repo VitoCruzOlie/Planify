@@ -4,6 +4,7 @@ import { onMounted } from 'vue'
 
 import { gsap } from "gsap";
 
+// Animation
 onMounted(() => {
   let timeline = gsap.timeline();
   timeline.to('.box', {x: "-100vh", duration: 0})
