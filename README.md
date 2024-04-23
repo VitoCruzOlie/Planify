@@ -14,7 +14,6 @@ Você precisará ter instalado na sua maquina:
   • Docker e Docker compose  
   • Node.js e NPM
   • Git
-  • PHP 8+ e Composer
 ```
     
 ## 🔧 Instalação - Back-End
@@ -24,13 +23,13 @@ Você precisará ter instalado na sua maquina:
 • Execute o comando no seu terminal e clone o repositório:
 
 ```bash
-  $ git clone https://github.com/DaviSouzaES/GAME-HUB-ES.git 
+  $ git clone https://github.com/VitoCruzOlie/Planify.git
 ```
 
 • Entre na pasta do projeto
 
 ```bash
-  $ cd GAME-HUB-ES
+  $ cd Planify
 ```
 
 ### 2. Preparando as dependências
@@ -38,16 +37,8 @@ Você precisará ter instalado na sua maquina:
 • Entre na pasta gamehub-api
 
 ```bash
-  $ cd gamehub-api
+  $ cd api
 ```
-
-• Instale as dependências
-
-```bash
-  $ composer install
-```
-
-### 3. Ambiente de desenvolvimento
 
 • Construir e rodar os containers:
 
@@ -60,16 +51,17 @@ Você precisará ter instalado na sua maquina:
   $ npm run start:docker
 ```
 
-• Iniciar servidor Back-End:
-
-```bash    
-  $ php artisan serve
-```
-
-• Resultado:
+• Instale as dependências:
 
 ```bash
-  INFO  Server running on [http://127.0.0.1:8000].
+  (entrar no terminal nginx docker)
+  $ npm run bash
+```
+
+• Rode as migrations:
+
+```bash    
+  $ php artisan migrate
 ```
 
 ## 🔧 Instalação - Front-Env Vue
