@@ -1,14 +1,14 @@
 <script setup lang="ts">
+
+//Component imports
 import Button from "../components/Button.vue";
 import SearchBar from "../components/SearchBar.vue";
 import CTA from "../components/CTA.vue";
 import HomeCarousel from "../components/HomeCarousel.vue";
 import NavBarBottom from "../components/NavBarBottom.vue";
 
-import { useStore } from 'vuex'
-
+//Library imports
 import { onMounted } from 'vue'
-
 import { gsap } from "gsap";
 
 onMounted(() => {
@@ -17,6 +17,7 @@ onMounted(() => {
   timeline.to('.box', { x: "0vh", duration: 0.5 })
 })
 
+gsap.to('.main', {})
 
 
 const isLogin = () => {
@@ -40,7 +41,7 @@ const isLogin = () => {
         <Button :variant="{ variant: 'outline' }" label="CRIE SEU EVENTO" />
       </div>
     </nav>
-    <main class="w-full max-w-7xl min-h-svh">
+    <main class="w-full max-w-7xl min-h-svh" ref="scroll">
       <div class="flex flex-row p-4 justify-between">
         <h1 class="text-primary text-xl font-bold">Planify</h1>
         <div class="  flex-row gap-2 hidden md:flex">
@@ -60,10 +61,10 @@ const isLogin = () => {
         </router-link>
       </div>
       </div>
-      <div class="gap-2.5 px-4 flex justify-center pb-4">
+      <div class="gap-2.5 px-4 flex justify-center pb-4 transition-all overflow-hidden">
         <SearchBar/>
       </div>
-      <HomeCarousel v-if="isLogin()" />
+      <HomeCarousel v-if="isLogin()" />  
       <div>
         <CTA v-if="!isLogin()" />
       </div>
