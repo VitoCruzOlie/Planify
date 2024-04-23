@@ -15,7 +15,7 @@ const props = defineProps<{
   >
     <div class="gap-0.5 p-2 w-full">
       <div
-        class="rounded-lg overflow-hidden w-full max-w-full h-96 max-h-96 min-w-full min-h-96 md:max-w-52 md:max-h-96  md:min-h-92"
+        class="rounded-lg overflow-hidden w-full max-w-full h-56 max-h-56 min-w-full min-h-96 md:max-w-52 md:max-h-96  md:min-h-92"
       >
         <img
           class="group-hover:scale-105 transition-all object-cover w-full h-full "

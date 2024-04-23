@@ -79,7 +79,7 @@ const redirect = (id) => {
         <h1 class="text-primary text-xl font-bold">Planify</h1>
       </router-link>
     </nav>
-    <main class="p-4 flex justify-center flex-col mb-20 w-full max-w-7xl">
+    <main class="box p-4 flex justify-center flex-col mb-20 w-full max-w-7xl">
       <VCalendar expanded color="blue" :attributes="attrs" />
       <section class="w-full items-center justify-center flex flex-col">
         <CardUserEvent
