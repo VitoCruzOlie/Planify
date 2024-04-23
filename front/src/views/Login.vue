@@ -11,12 +11,14 @@ import { onMounted } from 'vue'
 
 import { gsap } from "gsap";
 
+// Animation
 onMounted(() => {
   let timeline = gsap.timeline();
   timeline.to('.box', {x: "-100vh", duration: 0})
   timeline.to('.box', {x: "0vh", duration: 0.5})
 })
 
+// Toast
 const showAlertError = () => {
   toast.add({ severity: 'error', summary: 'Erro', detail: 'Email ou senha incorretos', life: 3000 });
 };

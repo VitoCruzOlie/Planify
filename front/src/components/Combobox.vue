@@ -24,8 +24,6 @@ const props = defineProps<{
 
 const emit = defineEmits(['attValue'])
 
-console.log(props.participants)
-
 const participants = props.participants
 
 const open = ref(false)

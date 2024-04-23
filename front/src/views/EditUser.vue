@@ -12,6 +12,8 @@ import { onMounted } from 'vue'
 
 import { gsap } from "gsap";
 
+
+// Animation
 onMounted(() => {
   let timeline = gsap.timeline();
   timeline.to('.box', {x: "-100vh", duration: 0})
@@ -19,7 +21,6 @@ onMounted(() => {
 })
 
 let user = ref()
-
 
 const loadData = async () => {
   try {
@@ -31,6 +32,7 @@ const loadData = async () => {
 }
 
 loadData()
+
 </script>
 <template>
   <div class="w-full flex flex-col justify-center items-center">

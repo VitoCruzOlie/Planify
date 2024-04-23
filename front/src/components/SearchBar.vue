@@ -7,10 +7,6 @@ const emit = defineEmits(['onSearch'])
 let inputValue = ref("")
 
 watch(inputValue, (newValue) => {
-  // if (!newValue) {
-  //   emit('onSearch', null)
-  //   return
-  // }
   emit('onSearch', newValue)
 })
 

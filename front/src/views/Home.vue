@@ -5,12 +5,11 @@ import CTA from "../components/CTA.vue";
 import HomeCarousel from "../components/HomeCarousel.vue";
 import NavBarBottom from "../components/NavBarBottom.vue";
 
-import { useStore } from 'vuex'
-
 import { onMounted, ref } from 'vue'
 
 import { gsap } from "gsap";
 
+// Animation
 onMounted(() => {
   let timeline = gsap.timeline();
   timeline.to('.box', { x: "-100vh", duration: 0 })

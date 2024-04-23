@@ -7,6 +7,7 @@ import { useRouter } from "vue-router";
 const router = useRouter()
 
 let actualRoute = router.currentRoute.value.path
+
 </script>
 
 <template>

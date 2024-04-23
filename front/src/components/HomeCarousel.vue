@@ -19,16 +19,16 @@ import { useToast } from 'primevue/usetoast';
 import { DateFormatter } from "@internationalized/date";
 
 const toast = useToast();
-
 const store = useStore();
 const router = useRouter();
-
 const props = defineProps({
   searchValue: String
 })
 
 const df = new DateFormatter("pt-BR");
 
+
+// Variables
 let events = ref([])
 let invites = ref([])
 let images = ref('https://picsum.photos/400/200')
@@ -38,6 +38,7 @@ let showSkeletonInvite = ref(false)
 let showWithoutEvents = ref(false)
 let searchEvents = ref([])
 let isSearch = ref(false)
+
 
 const loadData = async () => {
   try {
@@ -69,10 +70,12 @@ const loadData = async () => {
 
 loadData()
 
+// Watch on prop recevied to the home
 watch(props, (newValue) => {
   onSearch(newValue.searchValue)
 })
 
+// Update search value
 const onSearch = (inputValue) => {
   isSearch.value = true
   searchEvents.value = events.value.filter(event => event.name.toLowerCase().includes(inputValue))
