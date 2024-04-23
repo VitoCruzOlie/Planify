@@ -34,7 +34,7 @@ Você precisará ter instalado na sua maquina:
 
 ### 2. Preparando as dependências
 
-• Entre na pasta gamehub-api
+• Entre na pasta api
 
 ```bash
   $ cd api
@@ -68,10 +68,10 @@ Você precisará ter instalado na sua maquina:
 
 ### 1. Preparando as dependências
 
-• No diretório raiz, entre na pasta CLIENT
+• No diretório raiz, entre na pasta FRONT
 
 ```bash
-  $ cd client
+  $ cd front
 ```
 
 • Instale as dependências
@@ -85,22 +85,13 @@ Você precisará ter instalado na sua maquina:
 • Inicie o servidor front-end Vue
 
 ```bash
-  $ npm run serve
-```
-
-• Resultado:
-
-```bash
-  > client@0.1.0 serve
-  > vue-cli-service serve
-
- INFO  Starting development server...
+  $ npm run dev
 ```
 
 • Aguarde o build do projeto, ao terminar, acesse no seu navegador:
 
-  - Local:   http://localhost:8080/
-  - Network: http://192.168.0.103:8080/
+  - Local:   http://localhost:5173/
+  - Network: http://192.168.0.103:5173/
 
 ## 🛠️ Construído com
 
@@ -108,29 +99,22 @@ Você precisará ter instalado na sua maquina:
 * [Laravel](https://laravel.com) - O framework back-end usado;
 * [NPM](https://www.npmjs.com) - Gerente de Dependência;
 * [Composer](https://getcomposer.org) - Gerente de Dependência;
-* [RAWG Video Games Database API](https://api.rawg.io/docs/)) - API de dados.
-
 
 ## Features para implementar
 
-* Botão de editar as informações do usuário;
-* Paginação dos jogos comprados e com like;
-* Aplicar animações e efeitos em todas as telas;
-* Melhorar o tratamento de erros;
-* Padronizar todo o código.
+* aaaaaaaaa
 
 ## ✒️ Autores
 
 * **Davi Souza** - *Desenvolvimento Completo* - [Davi Souza](https://www.linkedin.com/in/davi-souza-745155246/)
+* **Victor Cruz** - *Desenvolvimento Completo* - [Davi Souza](https://www.linkedin.com/in/davi-souza-745155246/)
 
 ## 📄 Licença
 
 - [MIT](https://choosealicense.com/licenses/mit/)
 
-- *O uso da RAWG Video Games Database API deve ser respeitada de acordo com os termos e condições de uso, provido pela [RAWG](https://api.rawg.io/docs/)*
-
-
 ---
 
+![linkedin](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)
 ![linkedin](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)
 
