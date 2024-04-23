@@ -7,10 +7,11 @@ import CTA from "../components/CTA.vue";
 import HomeCarousel from "../components/HomeCarousel.vue";
 import NavBarBottom from "../components/NavBarBottom.vue";
 
-//Library imports
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
+
 import { gsap } from "gsap";
 
+// Animation
 onMounted(() => {
   let timeline = gsap.timeline();
   timeline.to('.box', { x: "-100vh", duration: 0 })
@@ -19,20 +20,21 @@ onMounted(() => {
 
 gsap.to('.main', {})
 
+let searchValue = ref()
 
 const isLogin = () => {
   if (localStorage.getItem("token")) return true;
   return false;
 };
 
-// store.dispatch('event/getAllEvents')
+const onSearch = (inputValue) => {
+  searchValue.value = inputValue
+}
+
 </script>
 <template>
-  <div class="flex flex-col justify-center items-center relative bg-white">
-    <nav
-      v-if="!isLogin()"
-      class="w-full bg-primary justify-center items-center flex flex-col py-4 px-2 gap-2"
-    >
+  <div class="box flex flex-col justify-center items-center relative bg-white">
+    <nav v-if="!isLogin()" class="w-full bg-primary justify-center items-center flex flex-col py-4 px-2 gap-2">
       <div class="w-full text-white font-bold text-center">
         <span>Crie seus eventos com a Planify agora!<br /></span>
         <span>A melhor plataforma do Brasil. </span>
@@ -45,26 +47,18 @@ const isLogin = () => {
       <div class="flex flex-row p-4 justify-between">
         <h1 class="text-primary text-xl font-bold">Planify</h1>
         <div class="  flex-row gap-2 hidden md:flex">
-        <router-link to="/create-event">
-          <Button
-            class="px-2"
-            :variant="{ variant: 'outline_secondary' }"
-            label="EVENTS"
-          />
-        </router-link>
-        <router-link to="/calendar">
-          <Button
-            class="px-2"
-            :variant="{ variant: 'outline_secondary' }"
-            label="CALENDAR"
-          />
-        </router-link>
+          <router-link to="/create-event">
+            <Button class="px-2" :variant="{ variant: 'outline_secondary' }" label="EVENTS" />
+          </router-link>
+          <router-link to="/calendar">
+            <Button class="px-2" :variant="{ variant: 'outline_secondary' }" label="CALENDAR" />
+          </router-link>
+        </div>
       </div>
+      <div class="box gap-2.5 px-4 flex justify-center pb-4">
+        <SearchBar @onSearch="onSearch" />
       </div>
-      <div class="gap-2.5 px-4 flex justify-center pb-4 transition-all overflow-hidden">
-        <SearchBar/>
-      </div>
-      <HomeCarousel v-if="isLogin()" />  
+      <HomeCarousel :searchValue="searchValue" v-if="isLogin()" />
       <div>
         <CTA v-if="!isLogin()" />
       </div>

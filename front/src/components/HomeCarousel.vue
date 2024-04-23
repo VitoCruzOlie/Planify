@@ -9,18 +9,26 @@ import EventCard from "../components/EventCard.vue";
 import InviteEventCard from "../components/InviteEventCard.vue";
 import Skeleton from 'primevue/skeleton';
 
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { useStore } from 'vuex'
 import { useRouter } from "vue-router";
 
 import Toast from 'primevue/toast';
 import { useToast } from 'primevue/usetoast';
 
-const toast = useToast();
+import { DateFormatter } from "@internationalized/date";
 
+const toast = useToast();
 const store = useStore();
 const router = useRouter();
+const props = defineProps({
+  searchValue: String
+})
 
+const df = new DateFormatter("pt-BR");
+
+
+// Variables
 let events = ref([])
 let invites = ref([])
 let images = ref('https://picsum.photos/400/200')
@@ -28,6 +36,9 @@ let showInvites = ref(false)
 let showSkeleton = ref(false)
 let showSkeletonInvite = ref(false)
 let showWithoutEvents = ref(false)
+let searchEvents = ref([])
+let isSearch = ref(false)
+
 
 const loadData = async () => {
   try {
@@ -39,8 +50,6 @@ const loadData = async () => {
     })
     showSkeleton.value = false
 
-    showSkeletonInvite.value = true
-    showInvites.value = true
     await store.dispatch('event/getInvites')
 
     store.getters['event/invites'].forEach((e) => {
@@ -53,12 +62,24 @@ const loadData = async () => {
     if (!(events.value.length > 0) && !(invites.value.length > 0)) {
       showWithoutEvents.value = true
     }
+
   } catch (error) {
     console.log(error)
   }
 }
 
 loadData()
+
+// Watch on prop recevied to the home
+watch(props, (newValue) => {
+  onSearch(newValue.searchValue)
+})
+
+// Update search value
+const onSearch = (inputValue) => {
+  isSearch.value = true
+  searchEvents.value = events.value.filter(event => event.name.toLowerCase().includes(inputValue))
+}
 
 const confirmInvite = async (event) => {
   try {
@@ -84,11 +105,31 @@ const redirect = (id) => {
 
   <Toast class="w-3/4" />
   <h1 v-if="showWithoutEvents" class="p-4">Nenhum evento disponível...</h1>
-  <Carousel>
-    <CarouselContent class="pl-2">
+  <Carousel class="box">
+    <CarouselContent v-if="!isSearch" class="pl-2">
       <Skeleton v-if="showSkeleton" class="p-4 ml-4" width="50%" height="8rem" borderRadius="16px"></Skeleton>
       <Skeleton v-if="showSkeleton" class="p-4 ml-4" width="50%" height="8rem" borderRadius="16px"></Skeleton>
       <CarouselItem v-for="(event, index) in events" :key="index" class="basis-1/1" @click="redirect(event.id)">
+
+        <EventCard :imageUrl="images">
+          <template #title>
+            <span class="text-black font-bold text-lg">{{ event.name }}</span>
+          </template>
+          <template #description>
+            <span class="text-gray-500 font-light text-xs line-clamp-1">{{ event.description }}</span>
+          </template>
+          <template #date>
+            <span class="text-primary font-bold text-xs">{{ df.format(new Date(event.date)) }}</span>
+          </template>
+        </EventCard>
+
+      </CarouselItem>
+    </CarouselContent>
+  </Carousel>
+
+  <Carousel class="box">
+    <CarouselContent class="pl-2">
+      <CarouselItem v-for="(event, index) in searchEvents" :key="index" class="basis-1/1" @click="redirect(event.id)">
 
         <EventCard :imageUrl="images">
           <template #title>
@@ -106,9 +147,9 @@ const redirect = (id) => {
     </CarouselContent>
   </Carousel>
 
-  <h1 v-if="showInvites" class="p-4 text-stone-700 text-xl font-bold">Convites</h1>
+  <h1 v-if="showInvites" class="box p-4 text-stone-700 text-xl font-bold">Convites</h1>
 
-  <Carousel>
+  <Carousel class="box">
     <CarouselContent class="pl-2">
 
       <Skeleton v-if="showSkeletonInvite" class="p-4 ml-4" width="50%" height="8rem" borderRadius="16px"></Skeleton>

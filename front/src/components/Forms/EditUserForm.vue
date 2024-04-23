@@ -19,6 +19,8 @@ import { useRouter } from "vue-router";
 // STORE
 const store = useStore()
 
+const router = useRouter()
+
 const toast = useToast();
 
 // ZOD

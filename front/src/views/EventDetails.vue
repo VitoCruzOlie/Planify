@@ -12,15 +12,14 @@ import { useRoute } from "vue-router";
 import Skeleton from "primevue/skeleton";
 
 import { DateFormatter } from "@internationalized/date";
+const df = new DateFormatter("pt-BR");
 
 const store = useStore();
 const route = useRoute();
 
-const df = new DateFormatter("pt-BR");
-
 let event = ref();
 let users = ref([]);
-let images = ref("https://picsum.photos/400/200");
+let images = ref("https://picsum.photos/1600/500");
 let weekDay = ref();
 let showSkeleton = ref(false);
 
@@ -43,7 +42,8 @@ const loadData = async () => {
   }
 };
 
-loadData();
+loadData()
+
 </script>
 
 <template>

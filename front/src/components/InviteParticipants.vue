@@ -29,10 +29,12 @@ const loadData = async () => {
 
 loadData()
 
+// Update email value emited from combobox
 const attEmailValue = (email) => {
   userEmail.value = email
 }
 
+// Invite and toast
 const invite = async () => {
   try {
     await store.dispatch('user/invite', {

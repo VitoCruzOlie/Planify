@@ -12,12 +12,14 @@ import { onMounted } from 'vue'
 
 import { gsap } from "gsap";
 
+// Animation
 onMounted(() => {
   let timeline = gsap.timeline();
   timeline.to('.box', {x: "-100vh", duration: 0})
   timeline.to('.box', {x: "0vh", duration: 0.5})
 })
 
+// Toast
 const showAlertError = () => {
   toast.add({
     severity: "error",
@@ -38,13 +40,13 @@ const showAlertSucess = () => {
 <template>
   <div class="w-full justify-center items-center flex flex-col">
     <nav
-      class="w-full flex flex-row justify-between p-2 items-center border border-b-neutral-300"
+      class="w-full flex flex-row justify-between p-4 items-center"
     >
       <router-link to="/">
         <h1 class="text-primary text-xl font-bold">Planify</h1>
       </router-link>
     </nav>
-    <main class="w-full max-w-7xl min-h-svh bg-white mb-20 flex flex-col">
+    <main class="box w-full max-w-7xl min-h-svh bg-white mb-20 flex flex-col">
       <Toast class="w-3/4" />
       <div class="w-full flex flex-col gap-7">
         <div
