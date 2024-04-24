@@ -10,6 +10,9 @@ import NavBarBottom from "../components/NavBarBottom.vue";
 import { onMounted, ref } from 'vue'
 
 import { gsap } from "gsap";
+import { useRouter } from "vue-router";
+
+const router = useRouter()
 
 // Animation
 onMounted(() => {
@@ -31,6 +34,10 @@ const onSearch = (inputValue) => {
   searchValue.value = inputValue
 }
 
+const redirect = () => {
+  router.push('/login')
+}
+
 </script>
 <template>
   <div class="box flex flex-col justify-center items-center relative bg-white">
@@ -40,7 +47,7 @@ const onSearch = (inputValue) => {
         <span>A melhor plataforma do Brasil. </span>
       </div>
       <div>
-        <Button :variant="{ variant: 'outline' }" label="CRIE SEU EVENTO" />
+        <Button @click="redirect" :variant="{ variant: 'outline' }" label="CRIE SEU EVENTO" />
       </div>
     </nav>
     <main class="w-full max-w-7xl min-h-svh" ref="scroll">
@@ -63,6 +70,6 @@ const onSearch = (inputValue) => {
         <CTA v-if="!isLogin()" />
       </div>
     </main>
-    <NavBarBottom v-if="isLogin()"></NavBarBottom>
   </div>
+  <NavBarBottom v-if="isLogin()"></NavBarBottom>
 </template>
